@@ -1,0 +1,16 @@
+.form{
+    display: flex;
+    flex-direction: column;
+}
+.button{
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+.ingredientDataBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    width: calc(100% - 2 *60px);
+}

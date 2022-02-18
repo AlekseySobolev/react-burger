@@ -1,0 +1,6 @@
+.modal{
+    min-width: 720px;
+    background-color: #1C1C21;
+    box-sizing: border-box;
+    border-radius: 40px;
+}

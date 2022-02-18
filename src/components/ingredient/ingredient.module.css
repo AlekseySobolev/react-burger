@@ -1,0 +1,5 @@
+.priceElement{
+    border: chartreuse 1px solid;
+    display:  flex;
+    align-items: center;
+}
