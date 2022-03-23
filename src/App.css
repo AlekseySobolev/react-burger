@@ -37,9 +37,9 @@
   }
 }
 .Main{
-  border: red 1px solid;
   margin: auto;
   width: calc(100% - 2*340px);
   display: flex;
   gap: 40px;
+  overflow:hidden;
 }
