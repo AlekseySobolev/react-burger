@@ -1,5 +1,8 @@
-.priceElement{
-    border: chartreuse 1px solid;
-    display:  flex;
-    align-items: center;
+.container{
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+.paragraph{
+    margin-right: 8px;
 }

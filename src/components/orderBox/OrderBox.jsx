@@ -9,8 +9,8 @@ function OrderBox(props) {
         return (
 
                 <div className={orderBoxStyles.orderButton}>
-                        <div  className={orderBoxStyles.test + " " + "mr-10"} style={{display: "flex", gap: "9.5px", alignItems: "center"}}>
-                                <p className={orderBoxStyles.test + " text text_type_digits-medium"}>610</p>
+                        <div  className={orderBoxStyles.priceBox + " mr-10"}>
+                                <p className={"text text_type_digits-medium"}>610</p>
                                 <CurrencyIcon type="primary" size="large" />
                         </div>
                         <Button type="primary" size="large" onClick = {() => props.onClick({})}>Оформить заказ</Button>

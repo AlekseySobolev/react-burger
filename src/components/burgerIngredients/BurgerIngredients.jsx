@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useRef } from 'react';
 import TabList from '../tabList/TabList.jsx';
 import Ingredient from '../ingredient/Ingredient.jsx';
@@ -18,7 +19,7 @@ function BurgerIngredients(props) {
 
     const renderIngredient = (e, index) => {
         return (
-            <li key={index} style={{ position: "relative", cursor:"pointer"}} onClick={() => props.onClick(e)}>
+            <li key={index} className = {burgerIngredientsStyles.listElement} onClick={() => props.onClick(e)}>
                 <Ingredient image={e.image} name={e.name} price={e.price} />
             </li>
         )
@@ -51,6 +52,11 @@ function BurgerIngredients(props) {
             </div>
         </section>
     );
+}
+
+BurgerIngredients.propTypes = {
+    burgerIngredients: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onClick: PropTypes.func,
 }
 
 export default BurgerIngredients;

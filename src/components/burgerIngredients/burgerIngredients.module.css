@@ -23,6 +23,10 @@
     column-gap: 24px;
     row-gap: 32px;
 }
+.listElement{
+    position: relative;
+    cursor: pointer;  
+}
 /* полоса прокрутки (скроллбар) */
 ::-webkit-scrollbar {
     width: 6px; /* ширина для вертикального скролла */

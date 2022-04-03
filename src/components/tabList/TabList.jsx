@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-
+import tabListStyles from './tablList.module.css';
 function TabList(props) {
 
   const [currentTab, setCurrent] = useState('one');
@@ -26,7 +26,7 @@ function TabList(props) {
       });
   }
   return (
-    <div style={{ display: 'flex' }}>
+    <div className={tabListStyles.tabListBox}>
       <Tab value="one" active={currentTab === 'one'} onClick={onTabClick}>
         Булки
       </Tab>

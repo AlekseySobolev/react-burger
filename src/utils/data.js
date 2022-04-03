@@ -1,4 +1,4 @@
-export const ingredients = [
+   export const burgerElements = [
     {
      "_id":"60666c42cc7b410027a1a9b1",
      "name":"Краторная булка N-200i",
@@ -210,4 +210,106 @@ export const ingredients = [
      "__v":0
     }
 ] 
+
+//  const burgerElements = [
+//     {
+//         "name": "Краторная булка N-200i",
+//         "type": "bun",
+//         "image": "https://code.s3.yandex.net/react/code/bun-02.png"
+
+//     },
+//     {
+//         "name": "Соус традиционный галактический",
+//         "type": "sauce",
+//         "image": "https://code.s3.yandex.net/react/code/sauce-03.png"
+//     },
+//     {
+//         "name": "Мясо бессмертных моллюсков Protostomia",
+//         "type": "main",
+//         "image": "https://code.s3.yandex.net/react/code/meat-02.png"
+//     },
+//     {
+//         "name": "Плоды Фалленианского дерева",
+//         "type": "main",
+//         "image": "https://code.s3.yandex.net/react/code/sp_1.png"
+
+//     },
+//     {
+//         "name": "Хрустящие минеральные кольца",
+//         "type": "main",
+//         "image": "https://code.s3.yandex.net/react/code/mineral_rings.png"
+//     },
+//     {
+//         "name": "Хрустящие минеральные кольца",
+//         "type": "main",
+//         "image": "https://code.s3.yandex.net/react/code/mineral_rings.png"
+//     },
+//     ,
+//     {
+//         "name": "Хрустящие минеральные кольца",
+//         "type": "main",
+//         "image": "https://code.s3.yandex.net/react/code/mineral_rings.png"
+//     },
+//     ,
+//     {
+//         "name": "Хрустящие минеральные кольца",
+//         "type": "main",
+//         "image": "https://code.s3.yandex.net/react/code/mineral_rings.png"
+//     },
+//     {
+//         "name": "Краторная булка N-200i",
+//         "type": "bun",
+//         "image": "https://code.s3.yandex.net/react/code/bun-02.png"
+//     }
+// ] = [
+//     {
+//         "name": "Краторная булка N-200i",
+//         "type": "bun",
+//         "image": "https://code.s3.yandex.net/react/code/bun-02.png"
+
+//     },
+//     {
+//         "name": "Соус традиционный галактический",
+//         "type": "sauce",
+//         "image": "https://code.s3.yandex.net/react/code/sauce-03.png"
+//     },
+//     {
+//         "name": "Мясо бессмертных моллюсков Protostomia",
+//         "type": "main",
+//         "image": "https://code.s3.yandex.net/react/code/meat-02.png"
+//     },
+//     {
+//         "name": "Плоды Фалленианского дерева",
+//         "type": "main",
+//         "image": "https://code.s3.yandex.net/react/code/sp_1.png"
+
+//     },
+//     {
+//         "name": "Хрустящие минеральные кольца",
+//         "type": "main",
+//         "image": "https://code.s3.yandex.net/react/code/mineral_rings.png"
+//     },
+//     {
+//         "name": "Хрустящие минеральные кольца",
+//         "type": "main",
+//         "image": "https://code.s3.yandex.net/react/code/mineral_rings.png"
+//     },
+//     ,
+//     {
+//         "name": "Хрустящие минеральные кольца",
+//         "type": "main",
+//         "image": "https://code.s3.yandex.net/react/code/mineral_rings.png"
+//     },
+//     ,
+//     {
+//         "name": "Хрустящие минеральные кольца",
+//         "type": "main",
+//         "image": "https://code.s3.yandex.net/react/code/mineral_rings.png"
+//     },
+//     {
+//         "name": "Краторная булка N-200i",
+//         "type": "bun",
+//         "image": "https://code.s3.yandex.net/react/code/bun-02.png"
+//     }
+// ]
 

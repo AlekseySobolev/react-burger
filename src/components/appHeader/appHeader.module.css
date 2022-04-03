@@ -24,7 +24,7 @@
 
 }
 .navigator{
-    margin: auto;
+    margin: 0 auto;
     width: calc(100% - 2 *320px);
 }
 
@@ -33,7 +33,4 @@
     padding-right: 289px;
     display:  flex;
     align-items: center;
-}
-.test{
-    border: red 1px solid;
 }

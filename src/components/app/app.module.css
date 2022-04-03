@@ -1,4 +1,4 @@
-.App {
+.app {
   text-align: center;
 }
 
@@ -36,10 +36,9 @@
     transform: rotate(360deg);
   }
 }
-.Main{
-  margin: auto;
+.main{
+  margin: 0 auto;
   width: calc(100% - 2*340px);
   display: flex;
   gap: 40px;
-  overflow:hidden;
 }

@@ -1,11 +1,9 @@
-import PropTypes from 'prop-types';
-import React, { SyntheticEvent, useEffect, useState, useRef } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import AppHeader from './components/appHeader/AppHeader.jsx';
-import BurgerIngredients from './components/burgerIngredients/BurgerIngredients.jsx';
-import BurgerConstructor from './components/burgerConstructor/BurgerConstructor.jsx';
-import ModalOverlay from './components/modalOverlay/ModalOverlay';
+import React, { useEffect, useState} from 'react';
+import appStyles from './app.module.css';
+import AppHeader from '../appHeader/AppHeader.jsx';
+import BurgerIngredients from '../burgerIngredients/BurgerIngredients.jsx';
+import BurgerConstructor from '../burgerConstructor/BurgerConstructor.jsx';
+import ModalOverlay from '../modalOverlay/ModalOverlay';
 
 function App() {
 
@@ -45,7 +43,7 @@ function App() {
   return (
     <>
       <ModalOverlay isOpened={overlayOpened} onOverlayClick = {onClick} onModalClick ={onModalClick} clickedObj = {clickedObj}/>
-      <div className="App">
+      <div className={appStyles.app}>
         {isLoading && 'Загрузка...'}
         {hasError && 'Произошла ошибка'}
         {!isLoading &&
@@ -53,9 +51,9 @@ function App() {
           (ingredients.length === undefined) &&
           <>
             <AppHeader />
-            <main className="Main">
+            <main className={appStyles.main}>
               <BurgerIngredients burgerIngredients={ingredients} onClick={onClick} />
-              <BurgerConstructor onClick={onClick} />
+              <BurgerConstructor burgerElements={ingredients} onClick={onClick} />
             </main>
           </>
         }

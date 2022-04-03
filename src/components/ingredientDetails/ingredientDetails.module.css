@@ -1,13 +1,15 @@
-.form{
+.form {
     display: flex;
     flex-direction: column;
 }
-.button{
+
+.button {
     background: transparent;
     border: 0;
     cursor: pointer;
 }
-.ingredientDataBox{
+
+.ingredientDataBox {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,4 +17,20 @@
     width: calc(100% - 2 *60px);
 }
 
+.buttonBox {
+    display: flex;
+    justify-content: space-between;
+}
 
+.caloriesBox {
+    display: flex;
+    gap: 20px;
+}
+
+.infoBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+}
