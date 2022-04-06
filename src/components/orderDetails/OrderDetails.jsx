@@ -1,15 +1,15 @@
+import PropTypes from 'prop-types';
 import orderDetailsStyles from './orderDetails.module.css';
 import stroke from '../../images/Vector (Stroke).png';
 import done from '../../images/done.png';
 
-function OrderDetails(props) {
-    const clickedIngredient = props.clickedIngredient;
+function OrderDetails({ onClick }) {
     return (
         <form className={"ml-10 mb-30 mr-10 mt-15"}>
             <div className={orderDetailsStyles.buttonBox}>
-                <button  className={orderDetailsStyles.button} type='button'><img src={stroke} alt="изображение крестика" onClick = {() => props.onCloseClick()}/></button>
+                <button  className={orderDetailsStyles.button} type='button'><img className={orderDetailsStyles.img} src={stroke} alt="изображение крестика" onClick = {() => onClick()}/></button>
             </div>
-            <div className={orderDetailsStyles.infoBox}>
+            <div className={orderDetailsStyles.infoBox + " mt-9"}>
                 <h1 className={"text text_type_digits-large mb-8"}>034536</h1>
                 <h2 className={"text text_type_main-medium mb-15"}>идентификатор заказа</h2>
                 <img className={"mb-15"} src={done} alt="изображение галки" />
@@ -21,4 +21,9 @@ function OrderDetails(props) {
         </form>
     )
 }
+
+OrderDetails.propTypes = {
+    onClick:  PropTypes.func
+}
+
 export default OrderDetails

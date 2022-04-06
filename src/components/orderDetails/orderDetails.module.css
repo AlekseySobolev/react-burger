@@ -7,6 +7,9 @@
     display: flex;
     justify-content: flex-end;
 }
+.img{
+    cursor: pointer;
+}
 .infoBox{
     display: flex;
     flex-direction:column;

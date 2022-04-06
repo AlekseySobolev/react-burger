@@ -2,30 +2,22 @@ import PropTypes from 'prop-types';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderBox from '../orderBox/OrderBox.jsx';
-// import { burgerElements } from '../../utils/data';
 import burgerConstructorStyles from './burgerConstructor.module.css';
 
-const renderTopConstructorElement = (e) => {
+const renderBunElement = (e, isTop) => {
+
+    const lastWord = isTop ? " (верх)" : " (низ)";
+    const typeValue = isTop ? "top" : "bottom";
 
     return (
 
-        <li key={e._id} className={burgerConstructorStyles.listElement + " ml-8 mr-2"}>
-            <ConstructorElement type={"top"} isLocked={true} text={e.name + " (верх)"} price={e.price} thumbnail={e.image} />
+        <li key = {isTop} className={burgerConstructorStyles.listElement + " ml-8 mr-2"}>
+            <ConstructorElement type={typeValue} isLocked={true} text={e.name + lastWord} price={e.price} thumbnail={e.image} />
         </li>
 
     )
 };
 
-const renderBottomConstructorElement = (e) => {
-
-    return (
-
-        <li key={e._id} className={burgerConstructorStyles.listElement + " ml-8 mr-2"}>
-            <ConstructorElement type={"bottom"} isLocked={true} text={e.name + " (низ)"} price={e.price} thumbnail={e.image} />
-        </li>
-
-    )
-};
 const renderMiddleConstructorElement = (e, index, array) => {
 
     const isMiddle = (index === 0) || (index === (array.length - 1)) ? false : true;
@@ -45,29 +37,29 @@ const renderMiddleConstructorElement = (e, index, array) => {
 function BurgerConstructor(props) {
 
     const burgerElements = props.burgerElements.data;
-    const firstElement = burgerElements[0];
-    const lastElement = burgerElements[burgerElements.length - 1];
+    const bunElement = burgerElements.find(e => (e.type === 'bun'));
 
     return (
-
-        <section className={burgerConstructorStyles.section}>
-            <ul className={burgerConstructorStyles.list + " mt-15 ml-4 mb-10"} >
-                {renderTopConstructorElement(firstElement)}
-                <div className={burgerConstructorStyles.list + " " + burgerConstructorStyles.constructorBox}>
-                    {burgerElements.map(renderMiddleConstructorElement)}
-                </div>
-                {renderBottomConstructorElement(lastElement)}
-            </ul>
-            <OrderBox onClick={props.onClick} />
-        </section>
-
-
+        <>
+            {bunElement &&
+                <section className={burgerConstructorStyles.section}>
+                    <ul className={burgerConstructorStyles.list + " mt-15 ml-4 mb-10"} >
+                        {renderBunElement(bunElement, true)}
+                        <div className={burgerConstructorStyles.list + " " + burgerConstructorStyles.constructorBox}>
+                            {burgerElements.map(renderMiddleConstructorElement)}
+                        </div>
+                        {renderBunElement(bunElement, false)}
+                    </ul>
+                    <OrderBox onClick={props.onClick} />
+                </section>
+            }
+        </>
     );
 
 }
 
 BurgerConstructor.propTypes = {
-    burgerElements: PropTypes.arrayOf(PropTypes.object).isRequired,
+    burgerElements: PropTypes.object,
     onClick: PropTypes.func
 }
 

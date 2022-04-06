@@ -9,7 +9,6 @@ function BurgerIngredients(props) {
     const burgerIngredients = props.burgerIngredients.data;
 
     const bunIngredients = burgerIngredients.filter(e => e.type === 'bun');
-    bunIngredients.onClick = props.onClick;
     const sauceIngredients = burgerIngredients.filter(e => e.type === 'sauce');
     const mainIngredients = burgerIngredients.filter(e => e.type === 'main');
 
@@ -19,11 +18,11 @@ function BurgerIngredients(props) {
 
     const renderIngredient = (e, index) => {
         return (
-            <li key={index} className = {burgerIngredientsStyles.listElement} onClick={() => props.onClick(e)}>
+            <li key={index} className={burgerIngredientsStyles.listElement} onClick={() => props.onClick(e)}>
                 <Ingredient image={e.image} name={e.name} price={e.price} />
             </li>
         )
-    
+
     };
 
     return (
@@ -55,8 +54,8 @@ function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-    burgerIngredients: PropTypes.arrayOf(PropTypes.object).isRequired,
-    onClick: PropTypes.func,
+    burgerIngredients: PropTypes.object,
+    onClick: PropTypes.func
 }
 
 export default BurgerIngredients;

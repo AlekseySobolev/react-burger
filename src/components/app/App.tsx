@@ -1,9 +1,11 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import appStyles from './app.module.css';
 import AppHeader from '../appHeader/AppHeader.jsx';
 import BurgerIngredients from '../burgerIngredients/BurgerIngredients.jsx';
 import BurgerConstructor from '../burgerConstructor/BurgerConstructor.jsx';
-import ModalOverlay from '../modalOverlay/ModalOverlay';
+import Modal from '../modal/Modal';
+import OrderDetails from '../orderDetails/OrderDetails';
+import IngredientDetails from '../ingredientDetails/IngredientDetails';
 
 function App() {
 
@@ -15,8 +17,20 @@ function App() {
     ingredients: []
   });
 
-  const [overlayOpened, setOverlay] = useState(false);
+  const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false);
+  const [isIngredientDetailsOpened, setisIngredientDetailsOpened] = useState(false);
+
+  const closeAllModals = () => {
+    setIsOrderDetailsOpened(false);
+    setisIngredientDetailsOpened(false);
+  };
+
+  const handleEscKeydown = (event) => {
+    event.key === "Escape" && closeAllModals();
+  };
+
   const [clickedObj, setclickedObj] = useState(undefined);
+
   useEffect(() => {
     setState({ ...state, hasError: false, isLoading: true });
     fetch(baseUrl)
@@ -29,20 +43,30 @@ function App() {
 
   const { ingredients, isLoading, hasError } = state;
 
-  const onClick = (clickedObj) => {
-    setOverlay(!overlayOpened);
+  const onIngredientDetailsClick = (clickedObj) => {
     setclickedObj(clickedObj);
+    setisIngredientDetailsOpened(true);
   };
-  
 
-  const onModalClick = (e) => {
-    //e.stopPropagation();
-    console.log(e);
-   }
+  const onOrderDetailsClick = (clickedObj) => {
+    setclickedObj(clickedObj);
+    setIsOrderDetailsOpened(true);
+  };
 
   return (
     <>
-      <ModalOverlay isOpened={overlayOpened} onOverlayClick = {onClick} onModalClick ={onModalClick} clickedObj = {clickedObj}/>
+      {isIngredientDetailsOpened &&
+        <Modal onOverlayClick={closeAllModals} onEscKeydown={handleEscKeydown}>
+          <IngredientDetails clickedIngredient={clickedObj} onClick={closeAllModals} />
+        </Modal>
+      }
+
+      {isOrderDetailsOpened &&
+        <Modal onOverlayClick={closeAllModals} onEscKeydown={handleEscKeydown}>
+          <OrderDetails onClick={closeAllModals} />
+        </Modal>
+      }
+
       <div className={appStyles.app}>
         {isLoading && 'Загрузка...'}
         {hasError && 'Произошла ошибка'}
@@ -52,13 +76,13 @@ function App() {
           <>
             <AppHeader />
             <main className={appStyles.main}>
-              <BurgerIngredients burgerIngredients={ingredients} onClick={onClick} />
-              <BurgerConstructor burgerElements={ingredients} onClick={onClick} />
+              <BurgerIngredients burgerIngredients={ingredients} onClick={onIngredientDetailsClick} />
+              <BurgerConstructor burgerElements={ingredients} onClick={onOrderDetailsClick} />
             </main>
           </>
         }
-
       </div>
+      
     </>
   );
 }

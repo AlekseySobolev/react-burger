@@ -1,16 +1,15 @@
-import Styles from './modalOverlay.module.css';
-import Modal from '../modal/Modal';
-import OrderBox from '../orderBox/OrderBox';
+import PropTypes from 'prop-types';
+import styles from './modalOverlay.module.css';
 
-function ModalOverlay(props){
+function ModalOverlay({onOverlayClick}){
 
-    return(
-        <div className = {props.isOpened ? Styles.modalOverlay_opened : Styles.modalOverlay} >
-            <Modal clickedObj = {props.clickedObj}  onOverlayClick = {props.onOverlayClick} onModalClick = {props.onModalClick}/>
-        </div>
+        return (
+          <div className={styles.modalOverlay} onClick = {() => onOverlayClick()}/>
+        );
+}
 
-    );
-
+ModalOverlay.propTypes = {
+  onOverlayClick: PropTypes.func
 }
 
 export default ModalOverlay;

@@ -1,7 +1,9 @@
-import {useState} from 'react';
+import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import tabListStyles from './tablList.module.css';
-function TabList(props) {
+
+function TabList({ bunRef, sauceRef, mainRef }) {
 
   const [currentTab, setCurrent] = useState('one');
 
@@ -9,18 +11,18 @@ function TabList(props) {
     setCurrent(e);
 
     if (e === "one") {
-      props.bunRef.current.scrollIntoView({
+      bunRef.current.scrollIntoView({
         behavior: "smooth",
         block: "nearest"
       });
     }
     else if (e === "two")
-      props.sauceRef.current.scrollIntoView({
+      sauceRef.current.scrollIntoView({
         behavior: "smooth",
         block: "nearest"
       });
     else if (e === "three")
-      props.mainRef.current.scrollIntoView({
+      mainRef.current.scrollIntoView({
         behavior: "smooth",
         block: "nearest"
       });
@@ -39,6 +41,11 @@ function TabList(props) {
     </div>
   )
 
+}
+TabList.propTypes = {
+  bunRef: PropTypes.object,
+  sauceRef: PropTypes.object,
+  mainRef: PropTypes.object
 }
 
 export default TabList;
