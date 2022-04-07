@@ -20,7 +20,7 @@ function OrderBox({ onClick }) {
 }
 
 OrderBox.propTypes = {
-        onOverlayClick: PropTypes.func
+        onOverlayClick: PropTypes.func.isRequired
 }
       
 export default OrderBox;

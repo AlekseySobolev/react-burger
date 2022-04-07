@@ -20,7 +20,7 @@ const renderBunElement = (e, isTop) => {
 
 const renderMiddleConstructorElement = (e, index, array) => {
 
-    const isMiddle = (index === 0) || (index === (array.length - 1)) ? false : true;
+    const isMiddle = (index === 0 || index === array.length - 1 || e.type === "bun") ? false : true;
 
     return (
         <>
@@ -50,7 +50,7 @@ function BurgerConstructor(props) {
                         </div>
                         {renderBunElement(bunElement, false)}
                     </ul>
-                    <OrderBox onClick={props.onClick} />
+                    <OrderBox onClick={props.onOrderButtonClick} />
                 </section>
             }
         </>
@@ -58,9 +58,14 @@ function BurgerConstructor(props) {
 
 }
 
+const burgerElements = PropTypes.shape({
+    data:PropTypes.arrayOf(PropTypes.object),
+    success: PropTypes.bool
+  });
+
 BurgerConstructor.propTypes = {
-    burgerElements: PropTypes.object,
-    onClick: PropTypes.func
+    burgerElements: burgerElements.isRequired,
+    onOrderButtonClick: PropTypes.func.isRequired
 }
 
 export default BurgerConstructor;

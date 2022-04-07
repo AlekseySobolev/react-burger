@@ -16,9 +16,9 @@ function BurgerIngredients(props) {
     const sauceRef = useRef(null);
     const mainRef = useRef(null);
 
-    const renderIngredient = (e, index) => {
+    const renderIngredient = (e) => {
         return (
-            <li key={index} className={burgerIngredientsStyles.listElement} onClick={() => props.onClick(e)}>
+            <li key={e._id} className={burgerIngredientsStyles.listElement} onClick={() => props.onIngredientClick(e)}>
                 <Ingredient image={e.image} name={e.name} price={e.price} />
             </li>
         )
@@ -53,9 +53,14 @@ function BurgerIngredients(props) {
     );
 }
 
+const burgerIngredients = PropTypes.shape({
+    data: PropTypes.arrayOf(PropTypes.object),
+    success: PropTypes.bool
+  });
+
 BurgerIngredients.propTypes = {
-    burgerIngredients: PropTypes.object,
-    onClick: PropTypes.func
+    burgerIngredients: burgerIngredients.isRequired,
+    onIngredientClick: PropTypes.func.isRequired
 }
 
 export default BurgerIngredients;

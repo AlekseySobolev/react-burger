@@ -16,3 +16,16 @@
     border-radius: 40px;
     z-index: 1;
 }
+.button{
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+.buttonBox {
+    display: flex;
+    justify-content: space-between;
+}
+.dataBox{
+    display: flex;
+    flex-direction: column;       
+}

@@ -1,17 +1,11 @@
 import PropTypes from 'prop-types';
 import ingredientDetailsStyles from './ingredientDetails.module.css';
-import stroke from '../../images/Vector (Stroke).png';
 
-function IngredientDetails({clickedIngredient, onClick}) {
-    
+function IngredientDetails({clickedIngredient}) {
+
     return (
         <>
         {clickedIngredient &&
-        <form className={ingredientDetailsStyles.form + ' ' + "ml-10 mb-15 mr-10 mt-10"}>
-            <div className={ingredientDetailsStyles.buttonBox}>
-                <h1 className={"text text_type_main-large"}>Детали ингредиента</h1>
-                <button className={ingredientDetailsStyles.button} type='button'><img className={ingredientDetailsStyles.img} src={stroke} alt="Изображение крестика" onClick = {() => onClick()}/></button>
-            </div>
             <div className={ingredientDetailsStyles.ingredientDataBox}>
                 <img className={"mb-4 pl-5 pr-5"} src={clickedIngredient.image_large} alt="Изображение ингредиента" />
                 <h2 className={ingredientDetailsStyles.h2 + " text text_type_main-medium"}>{clickedIngredient.name}</h2>
@@ -34,15 +28,30 @@ function IngredientDetails({clickedIngredient, onClick}) {
                     </div>
                 </div>
             </div>
-        </form>
+
         }
         </>
     )
 }
 
+const clickedIngredient = PropTypes.shape({
+    calories: PropTypes.number.isRequired,
+    carbohydrates:  PropTypes.number.isRequired,
+    fat:  PropTypes.number.isRequired,
+    image:  PropTypes.string.isRequired,
+    image_large: PropTypes.string.isRequired,
+    image_mobile: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price:  PropTypes.number.isRequired,
+    proteins:  PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    __v:  PropTypes.number.isRequired,
+    _id: PropTypes.string.isRequired 
+
+});
+
 IngredientDetails.propTypes = {
-    clickedIngredient: PropTypes.object,
-    onClick:  PropTypes.func,
+    clickedIngredient: clickedIngredient
 }
 
 export default IngredientDetails

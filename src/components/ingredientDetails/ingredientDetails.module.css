@@ -1,38 +1,16 @@
-.form {
-    display: flex;
-    flex-direction: column;
-}
-
 .h2{
     margin: 0 auto;
 }
-.button {
-    background: transparent;
-    border: 0;
-    cursor: pointer;
-}
-
-.img{
-    cursor: pointer;
-}
-
 .ingredientDataBox {
     display: flex;
     flex-direction: column;
     margin: auto;
 }
-
-.buttonBox {
-    display: flex;
-    justify-content: space-between;
-}
-
 .caloriesBox {
     display: flex;
     gap: 20px; 
 
 }
-
 .infoBox {
     display: flex;
     min-width: 120px;

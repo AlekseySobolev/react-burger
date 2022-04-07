@@ -6,3 +6,9 @@
 .paragraph{
     margin-right: 8px;
 }
+.p{
+    width: 272px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
