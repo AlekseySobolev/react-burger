@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import ModalOverlay from '../modalOverlay/ModalOverlay';
 import Styles from './modal.module.css';
@@ -9,9 +9,11 @@ const modalsContainer = document.querySelector('#modals');
 
 function Modal({ title, onOverlayClick, children }) {
 
-    const handleEscKeydown = (event) => {
-        event.key === "Escape" && onOverlayClick();
-    };
+    const handleEscKeydown = useCallback(
+        (event) => {
+            event.key === "Escape" && onOverlayClick();
+        },
+        []);
 
     useEffect(() => {
         document.addEventListener('keydown', handleEscKeydown);
@@ -39,6 +41,7 @@ function Modal({ title, onOverlayClick, children }) {
 }
 
 Modal.propTypes = {
+    title: PropTypes.string.isRequired,
     onOverlayClick: PropTypes.func.isRequired,
     children: PropTypes.element.isRequired
 }

@@ -38,7 +38,6 @@ function App() {
       })
       .then(ingredients => setState({ ...state, ingredients, isLoading: false }))
       .catch(e => {
-        console.log(e);
         setState({ ...state, hasError: true, isLoading: false });
       });
   }, []);

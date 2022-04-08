@@ -3,7 +3,7 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderBox from '../orderBox/OrderBox.jsx';
 import burgerConstructorStyles from './burgerConstructor.module.css';
-
+import { ingredientType } from '../../utils/constants.js';
 const renderBunElement = (e, isTop) => {
 
     const lastWord = isTop ? " (верх)" : " (низ)";
@@ -11,7 +11,7 @@ const renderBunElement = (e, isTop) => {
 
     return (
 
-        <li key = {isTop} className={burgerConstructorStyles.listElement + " ml-8 mr-2"}>
+        <li key={isTop} className={burgerConstructorStyles.listElement + " ml-8 mr-2"}>
             <ConstructorElement type={typeValue} isLocked={true} text={e.name + lastWord} price={e.price} thumbnail={e.image} />
         </li>
 
@@ -59,9 +59,9 @@ function BurgerConstructor(props) {
 }
 
 const burgerElements = PropTypes.shape({
-    data:PropTypes.arrayOf(PropTypes.object),
+    data: PropTypes.arrayOf(ingredientType),
     success: PropTypes.bool
-  });
+});
 
 BurgerConstructor.propTypes = {
     burgerElements: burgerElements.isRequired,

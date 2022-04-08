@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import TabList from '../tabList/TabList.jsx';
 import Ingredient from '../ingredient/Ingredient.jsx';
 import burgerIngredientsStyles from './burgerIngredients.module.css';
-
+import { ingredientType } from '../../utils/constants.js';
 function BurgerIngredients(props) {
 
     const burgerIngredients = props.burgerIngredients.data;
@@ -54,9 +54,9 @@ function BurgerIngredients(props) {
 }
 
 const burgerIngredients = PropTypes.shape({
-    data: PropTypes.arrayOf(PropTypes.object),
+    data: PropTypes.arrayOf(ingredientType),
     success: PropTypes.bool
-  });
+});
 
 BurgerIngredients.propTypes = {
     burgerIngredients: burgerIngredients.isRequired,

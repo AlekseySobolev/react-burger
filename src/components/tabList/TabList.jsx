@@ -45,9 +45,9 @@ function TabList({ bunRef, sauceRef, mainRef }) {
 
 TabList.propTypes = PropTypes.shape(
   {
-    bunRef: PropTypes.instanceOf(Element),
-    sauceRef: PropTypes.instanceOf(Element),
-    mainRef: PropTypes.instanceOf(Element)
+    bunRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+    sauceRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+    mainRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) })
   }
 )
 
