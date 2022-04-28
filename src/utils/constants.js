@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types';
 
 export  const baseUrl = "https://norma.nomoreparties.space/api";
+
 export const ingredientType = PropTypes.shape({
     calories: PropTypes.number.isRequired,
     carbohydrates:  PropTypes.number.isRequired,

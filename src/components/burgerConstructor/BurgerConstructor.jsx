@@ -1,14 +1,18 @@
-import PropTypes from 'prop-types';
+import { useState, useEffect, useContext } from 'react';
+//import PropTypes from 'prop-types';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderBox from '../orderBox/OrderBox.jsx';
 import burgerConstructorStyles from './burgerConstructor.module.css';
-import { ingredientType } from '../../utils/constants.js';
+//import { ingredientType } from '../../utils/constants.js';
+import { baseUrl } from '../../utils/constants';
+import { BurgerConstracorContext } from '../../services/burgerConstractorContext.js';
+//import { OrderBoxContext } from '../../services/OrderBoxContext.js';
+
 const renderBunElement = (e, isTop) => {
 
     const lastWord = isTop ? " (верх)" : " (низ)";
     const typeValue = isTop ? "top" : "bottom";
-
     return (
 
         <li key={isTop} className={burgerConstructorStyles.listElement + " ml-8 mr-2"}>
@@ -18,9 +22,10 @@ const renderBunElement = (e, isTop) => {
     )
 };
 
+
 const renderMiddleConstructorElement = (e, index, array) => {
 
-    const isMiddle = (index === 0 || index === array.length - 1 || e.type === "bun") ? false : true;
+    const isMiddle = e.type === "bun" ? false : true;
 
     return (
         <>
@@ -34,10 +39,61 @@ const renderMiddleConstructorElement = (e, index, array) => {
     )
 };
 
-function BurgerConstructor(props) {
+// const fullPriceInitialState = { fullPrice: 0 };
 
-    const burgerElements = props.burgerElements.data;
+// function reducer(state, action) {
+//   switch (action.type) {
+//     case "sum":
+//       return { fullPrice: action.fullPrice };
+//       case "zero":
+//         return { fullPrice: fullPriceInitialState };
+//     default:
+//       throw new Error(`Wrong type of action: ${action.type}`);
+//   }
+// }
+
+function BurgerConstructor() {
+    
+
+    const { burgerElements, onOrderButtonClick } = useContext(BurgerConstracorContext);
+    // const [fullPriceState, fullPriceDispatcher] = useReducer(reducer, fullPriceInitialState, undefined);
+    const prices = [];
     const bunElement = burgerElements.find(e => (e.type === 'bun'));
+    const noBunElements = burgerElements.filter(e => (e.type !== 'bun'));
+    noBunElements.forEach(noBunElement => prices.push(noBunElement.price));
+    if(bunElement)prices.push(2*bunElement.price);
+
+    const idBurgersElement = burgerElements.map(e => e._id);
+    const orderNumberUrl = baseUrl + "/orders";
+
+    const [orderNumberstate, setOrderNumberState] = useState({
+        hasError: false,
+        orderNumberInfo: {}
+    });
+
+    useEffect(() => {
+        setOrderNumberState({ ...orderNumberstate, hasError: false });
+        fetch(orderNumberUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({
+                ingredients: idBurgersElement
+            })
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Error occurred!")
+                }
+                return response.json()
+            })
+            .then(orderNumberInfo => setOrderNumberState({ ...orderNumberstate, orderNumberInfo }))
+            .catch(e => {
+                setOrderNumberState({ ...orderNumberstate, hasError: true });
+            });
+    }, []);
+
 
     return (
         <>
@@ -46,26 +102,18 @@ function BurgerConstructor(props) {
                     <ul className={burgerConstructorStyles.list + " mt-15 ml-4 mb-10"} >
                         {renderBunElement(bunElement, true)}
                         <div className={burgerConstructorStyles.list + " " + burgerConstructorStyles.constructorBox}>
-                            {burgerElements.map(renderMiddleConstructorElement)}
+                            {noBunElements.map(renderMiddleConstructorElement)}
                         </div>
                         {renderBunElement(bunElement, false)}
                     </ul>
-                    <OrderBox onClick={props.onOrderButtonClick} />
+                    {/* <OrderBoxContext.Provider value={{ fullPriceState, fullPriceDispatcher, onOrderButtonClick, fullPrice}}> */}
+                    <OrderBox onOrderButtonClick={onOrderButtonClick} prices={prices} orderNumberstate={orderNumberstate} />
+                    {/* </OrderBoxContext.Provider> */}
                 </section>
             }
         </>
     );
 
-}
-
-const burgerElements = PropTypes.shape({
-    data: PropTypes.arrayOf(ingredientType),
-    success: PropTypes.bool
-});
-
-BurgerConstructor.propTypes = {
-    burgerElements: burgerElements.isRequired,
-    onOrderButtonClick: PropTypes.func.isRequired
 }
 
 export default BurgerConstructor;

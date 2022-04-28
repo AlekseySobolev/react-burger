@@ -6,7 +6,7 @@ import burgerIngredientsStyles from './burgerIngredients.module.css';
 import { ingredientType } from '../../utils/constants.js';
 function BurgerIngredients(props) {
 
-    const burgerIngredients = props.burgerIngredients.data;
+    const burgerIngredients = props.burgerIngredients;
 
     const bunIngredients = burgerIngredients.filter(e => e.type === 'bun');
     const sauceIngredients = burgerIngredients.filter(e => e.type === 'sauce');

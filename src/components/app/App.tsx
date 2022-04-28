@@ -7,6 +7,9 @@ import Modal from '../modal/Modal';
 import OrderDetails from '../orderDetails/OrderDetails';
 import IngredientDetails from '../ingredientDetails/IngredientDetails';
 import { baseUrl } from '../../utils/constants';
+import { BurgerConstracorContext } from '../../services/burgerConstractorContext';
+import { OrderBoxContext } from '../../services/OrderBoxContext';
+
 function App() {
 
   const ingredientsUrl = baseUrl + "/ingredients";
@@ -14,7 +17,7 @@ function App() {
   const [state, setState] = useState({
     isLoading: false,
     hasError: false,
-    ingredients: []
+    ingredients: { data: [], success: false }
   });
 
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false);
@@ -26,6 +29,7 @@ function App() {
   };
 
   const [clickedIngredient, setClickedIngredient] = useState(undefined);
+  const [orderNumber, setOrderNumber] = useState(0);
 
   useEffect(() => {
     setState({ ...state, hasError: false, isLoading: true });
@@ -44,14 +48,18 @@ function App() {
 
   const { ingredients, isLoading, hasError } = state;
 
+
+
   const onIngredientDetailsClick = (clickedIngredient) => {
     setClickedIngredient(clickedIngredient);
     setIsIngredientDetailsOpened(true);
   };
 
-  const onOrderDetailsClick = (clickedIngredient) => {
-    setClickedIngredient(clickedIngredient);
-    setIsOrderDetailsOpened(true);
+  const onOrderDetailsClick = (orderData) => {
+    if (!orderData.hasError) {
+      setOrderNumber(orderData.orderNumberInfo.order.number);
+      setIsOrderDetailsOpened(true);
+    }
   };
 
   return (
@@ -64,7 +72,9 @@ function App() {
 
       {isOrderDetailsOpened &&
         <Modal title={""} onOverlayClick={closeAllModals}>
-          <OrderDetails />
+          <OrderBoxContext.Provider value={orderNumber}>
+            <OrderDetails />
+          </OrderBoxContext.Provider>
         </Modal>
       }
 
@@ -73,12 +83,14 @@ function App() {
         {hasError && 'Произошла ошибка'}
         {!isLoading &&
           !hasError &&
-          (ingredients.length === undefined) &&
+          (ingredients.data.length !== 0) &&
           <>
             <AppHeader />
             <main className={appStyles.main}>
-              <BurgerIngredients burgerIngredients={ingredients} onIngredientClick={onIngredientDetailsClick} />
-              <BurgerConstructor burgerElements={ingredients} onOrderButtonClick={onOrderDetailsClick} />
+              <BurgerIngredients burgerIngredients={ingredients.data} onIngredientClick={onIngredientDetailsClick} />
+              <BurgerConstracorContext.Provider value={{ burgerElements: ingredients.data, onOrderButtonClick: onOrderDetailsClick }}>
+                <BurgerConstructor />
+              </BurgerConstracorContext.Provider>
             </main>
           </>
         }
