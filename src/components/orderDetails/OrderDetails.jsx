@@ -1,10 +1,8 @@
-import { useContext } from 'react';
 import orderDetailsStyles from './orderDetails.module.css';
 import done from '../../images/done.png';
-import { OrderBoxContext } from '../../services/OrderBoxContext';
 
-function OrderDetails() {
-    const orderNumber = useContext(OrderBoxContext);
+function OrderDetails({orderNumber}) {
+
     return ( 
             <div className={orderDetailsStyles.infoBox + " mt-9"}>
                 <h1 className={"text text_type_digits-large mb-8"}>{orderNumber}</h1>

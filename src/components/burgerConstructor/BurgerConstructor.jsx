@@ -6,7 +6,7 @@ import OrderBox from '../orderBox/OrderBox.jsx';
 import burgerConstructorStyles from './burgerConstructor.module.css';
 //import { ingredientType } from '../../utils/constants.js';
 import { baseUrl } from '../../utils/constants';
-import { BurgerConstracorContext } from '../../services/burgerConstractorContext.js';
+import { BurgerContext } from '../../services/burgerContext.js';
 //import { OrderBoxContext } from '../../services/OrderBoxContext.js';
 
 const renderBunElement = (e, isTop) => {
@@ -55,7 +55,7 @@ const renderMiddleConstructorElement = (e, index, array) => {
 function BurgerConstructor() {
     
 
-    const { burgerElements, onOrderButtonClick } = useContext(BurgerConstracorContext);
+    const { burgerElements, onOrderButtonClick } = useContext(BurgerContext);
     // const [fullPriceState, fullPriceDispatcher] = useReducer(reducer, fullPriceInitialState, undefined);
     const prices = [];
     const bunElement = burgerElements.find(e => (e.type === 'bun'));
@@ -64,35 +64,36 @@ function BurgerConstructor() {
     if(bunElement)prices.push(2*bunElement.price);
 
     const idBurgersElement = burgerElements.map(e => e._id);
-    const orderNumberUrl = baseUrl + "/orders";
+    // const orderNumberUrl = baseUrl + "/orders";
 
-    const [orderNumberstate, setOrderNumberState] = useState({
-        hasError: false,
-        orderNumberInfo: {}
-    });
+    // const [orderNumberstate, setOrderNumberState] = useState({
+    //     hasError: false,
+    //     orderNumberInfo: {}
+    // });
 
-    useEffect(() => {
-        setOrderNumberState({ ...orderNumberstate, hasError: false });
-        fetch(orderNumberUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-              },
-            body: JSON.stringify({
-                ingredients: idBurgersElement
-            })
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Error occurred!")
-                }
-                return response.json()
-            })
-            .then(orderNumberInfo => setOrderNumberState({ ...orderNumberstate, orderNumberInfo }))
-            .catch(e => {
-                setOrderNumberState({ ...orderNumberstate, hasError: true });
-            });
-    }, []);
+    
+    // useEffect(() => {
+    //     setOrderNumberState({ ...orderNumberstate, hasError: false });
+    //     fetch(orderNumberUrl, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //           },
+    //         body: JSON.stringify({
+    //             ingredients: idBurgersElement
+    //         })
+    //     })
+    //         .then((response) => {
+    //             if (!response.ok) {
+    //                 throw new Error("Error occurred!")
+    //             }
+    //             return response.json()
+    //         })
+    //         .then(orderNumberInfo => setOrderNumberState({ ...orderNumberstate, orderNumberInfo }))
+    //         .catch(e => {
+    //             setOrderNumberState({ ...orderNumberstate, hasError: true });
+    //         });
+    // }, []);
 
 
     return (
@@ -107,7 +108,7 @@ function BurgerConstructor() {
                         {renderBunElement(bunElement, false)}
                     </ul>
                     {/* <OrderBoxContext.Provider value={{ fullPriceState, fullPriceDispatcher, onOrderButtonClick, fullPrice}}> */}
-                    <OrderBox onOrderButtonClick={onOrderButtonClick} prices={prices} orderNumberstate={orderNumberstate} />
+                    <OrderBox onOrderButtonClick={onOrderButtonClick} prices={prices} idBurgersElement={idBurgersElement} />
                     {/* </OrderBoxContext.Provider> */}
                 </section>
             }
