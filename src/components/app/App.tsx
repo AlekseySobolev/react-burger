@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import appStyles from './app.module.css';
 import AppHeader from '../appHeader/AppHeader.jsx';
 import BurgerIngredients from '../burgerIngredients/BurgerIngredients.jsx';
@@ -13,6 +13,10 @@ function App() {
 
   const ingredientsUrl = baseUrl + "/ingredients";
   const orderNumberUrl = baseUrl + "/orders";
+
+  const bunRef = useRef(null);
+  const sauceRef = useRef(null);
+  const mainRef = useRef(null);
 
   const [state, setState] = useState({
     isLoading: false,
@@ -101,22 +105,20 @@ function App() {
         </Modal>
       }
 
-      <div className={appStyles.app}>
+      <div className={appStyles.page}>
         {isLoading && 'Загрузка...'}
         {hasError && 'Произошла ошибка'}
         {!isLoading &&
           !hasError &&
           (ingredients.data.length !== 0) &&
           <>
-            <div className={appStyles.page}>
               <AppHeader />
               <main className={appStyles.main}>
+              <BurgerContext.Provider value={{ burgerElements: ingredients.data, bunRef: bunRef, sauceRef: sauceRef, mainRef: mainRef}}>
                 <BurgerIngredients burgerIngredients={ingredients.data} onIngredientClick={onIngredientDetailsClick} />
-                <BurgerContext.Provider value={{ burgerElements: ingredients.data, onOrderButtonClick: onOrderDetailsClick }}>
-                  <BurgerConstructor />
-                </BurgerContext.Provider>
+                <BurgerConstructor />
+              </BurgerContext.Provider>
               </main>
-            </div>
           </>
         }
       </div>

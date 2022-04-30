@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 //import PropTypes from 'prop-types';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -64,38 +64,7 @@ function BurgerConstructor() {
     if(bunElement)prices.push(2*bunElement.price);
 
     const idBurgersElement = burgerElements.map(e => e._id);
-    // const orderNumberUrl = baseUrl + "/orders";
-
-    // const [orderNumberstate, setOrderNumberState] = useState({
-    //     hasError: false,
-    //     orderNumberInfo: {}
-    // });
-
     
-    // useEffect(() => {
-    //     setOrderNumberState({ ...orderNumberstate, hasError: false });
-    //     fetch(orderNumberUrl, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //           },
-    //         body: JSON.stringify({
-    //             ingredients: idBurgersElement
-    //         })
-    //     })
-    //         .then((response) => {
-    //             if (!response.ok) {
-    //                 throw new Error("Error occurred!")
-    //             }
-    //             return response.json()
-    //         })
-    //         .then(orderNumberInfo => setOrderNumberState({ ...orderNumberstate, orderNumberInfo }))
-    //         .catch(e => {
-    //             setOrderNumberState({ ...orderNumberstate, hasError: true });
-    //         });
-    // }, []);
-
-
     return (
         <>
             {bunElement &&
@@ -107,9 +76,7 @@ function BurgerConstructor() {
                         </div>
                         {renderBunElement(bunElement, false)}
                     </ul>
-                    {/* <OrderBoxContext.Provider value={{ fullPriceState, fullPriceDispatcher, onOrderButtonClick, fullPrice}}> */}
                     <OrderBox onOrderButtonClick={onOrderButtonClick} prices={prices} idBurgersElement={idBurgersElement} />
-                    {/* </OrderBoxContext.Provider> */}
                 </section>
             }
         </>

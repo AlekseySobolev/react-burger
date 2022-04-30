@@ -24,6 +24,7 @@
     row-gap: 32px;
 }
 .listElement{
+    text-align: center;
     position: relative;
     cursor: pointer;  
 }

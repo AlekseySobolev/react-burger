@@ -1,24 +1,25 @@
 import PropTypes from 'prop-types';
-import { useRef } from 'react';
+import { useContext } from 'react';
 import TabList from '../tabList/TabList.jsx';
 import Ingredient from '../ingredient/Ingredient.jsx';
 import burgerIngredientsStyles from './burgerIngredients.module.css';
 import { ingredientType } from '../../utils/constants.js';
-function BurgerIngredients(props) {
+import { BurgerContext } from '../../services/burgerContext.js';
 
-    const burgerIngredients = props.burgerIngredients;
+function BurgerIngredients({burgerIngredients, onIngredientClick}) {
 
     const bunIngredients = burgerIngredients.filter(e => e.type === 'bun');
     const sauceIngredients = burgerIngredients.filter(e => e.type === 'sauce');
     const mainIngredients = burgerIngredients.filter(e => e.type === 'main');
 
-    const bunRef = useRef(null);
-    const sauceRef = useRef(null);
-    const mainRef = useRef(null);
+    // const bunRef = useRef(null);
+    // const sauceRef = useRef(null);
+    // const mainRef = useRef(null);
+    const { bunRef, sauceRef, mainRef } = useContext(BurgerContext);
 
     const renderIngredient = (e) => {
         return (
-            <li key={e._id} className={burgerIngredientsStyles.listElement} onClick={() => props.onIngredientClick(e)}>
+            <li key={e._id} className={burgerIngredientsStyles.listElement} onClick={() => onIngredientClick(e)}>
                 <Ingredient image={e.image} name={e.name} price={e.price} />
             </li>
         )
@@ -28,7 +29,8 @@ function BurgerIngredients(props) {
     return (
         <section className={burgerIngredientsStyles.section}>
             <h1 className={burgerIngredientsStyles.h1 + " text text_type_main-large mb-5"}>Соберите бургер</h1>
-            <TabList bunRef={bunRef} sauceRef={sauceRef} mainRef={mainRef} />
+            {/* <TabList bunRef={bunRef} sauceRef={sauceRef} mainRef={mainRef} /> */}
+            <TabList />
             <div className={burgerIngredientsStyles.ingredientBox + " mt-10"}>
                 <section className={burgerIngredientsStyles.ingredientSection} ref={bunRef}>
                     <h2 className={burgerIngredientsStyles.h2 + " text text_type_main-medium"}>Булки</h2>
@@ -53,13 +55,12 @@ function BurgerIngredients(props) {
     );
 }
 
-const burgerIngredients = PropTypes.shape({
-    data: PropTypes.arrayOf(ingredientType),
-    success: PropTypes.bool
-});
+// const burgerIngredients = PropTypes.shape({
+//     data: PropTypes.arrayOf(ingredientType),
+// });
 
 BurgerIngredients.propTypes = {
-    burgerIngredients: burgerIngredients.isRequired,
+    burgerIngredients: PropTypes.arrayOf(ingredientType).isRequired,
     onIngredientClick: PropTypes.func.isRequired
 }
 

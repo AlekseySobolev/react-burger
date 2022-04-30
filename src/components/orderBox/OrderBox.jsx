@@ -24,7 +24,7 @@ function OrderBox({ onOrderButtonClick, prices, idBurgersElement }) {
 }
 
 OrderBox.propTypes = {
-        onOrderButtonClick: PropTypes.func.isRequired,
+        onOrderButtonClick: PropTypes.func,
         prices: PropTypes.array.isRequired,
         idBurgersElement: PropTypes.array.isRequired,
  }

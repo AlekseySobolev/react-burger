@@ -1,9 +1,12 @@
-import PropTypes from 'prop-types';
-import { useState } from 'react';
+//import PropTypes from 'prop-types';
+import { useState, useContext } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import tabListStyles from './tablList.module.css';
+import { BurgerContext } from '../../services/burgerContext';
 
-function TabList({ bunRef, sauceRef, mainRef }) {
+function TabList() {
+
+  const { bunRef, sauceRef, mainRef } = useContext(BurgerContext);
 
   const [currentTab, setCurrent] = useState('one');
 
@@ -43,12 +46,12 @@ function TabList({ bunRef, sauceRef, mainRef }) {
 
 }
 
-TabList.propTypes = PropTypes.shape(
-  {
-    bunRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-    sauceRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-    mainRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) })
-  }
-)
+// TabList.propTypes = PropTypes.shape(
+//   {
+//     bunRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+//     sauceRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+//     mainRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) })
+//   }
+// )
 
 export default TabList;

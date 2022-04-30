@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import ingredientDetailsStyles from './ingredientDetails.module.css';
 import { ingredientType } from '../../utils/constants';
 
