@@ -7,7 +7,6 @@ import burgerConstructorStyles from './burgerConstructor.module.css';
 //import { ingredientType } from '../../utils/constants.js';
 import { baseUrl } from '../../utils/constants';
 import { BurgerContext } from '../../services/burgerContext.js';
-//import { OrderBoxContext } from '../../services/OrderBoxContext.js';
 
 const renderBunElement = (e, isTop) => {
 
@@ -23,14 +22,16 @@ const renderBunElement = (e, isTop) => {
 };
 
 
-const renderMiddleConstructorElement = (e, index, array) => {
+const renderMiddleConstructorElement = (e) => {
 
     const isMiddle = e.type === "bun" ? false : true;
 
     return (
         <>
             {isMiddle &&
-                <li key={e._id} className={burgerConstructorStyles.middleListElement + " mr-2"}>
+                <li key={e._id} className={burgerConstructorStyles.middleListElement + " mr-2"}>  {/* Непонимиаю почему возникает ошибка. Warning: Each child in a list should have a unique "key" prop.
+
+                                                                                                Check the render method of `BurgerConstructor`. See https://reactjs.org/link/warning-keys for more information.*/}
                     <DragIcon type="primary" />
                     <ConstructorElement isLocked={!isMiddle} text={e.name} price={e.price} thumbnail={e.image} />
                 </li>
@@ -39,24 +40,10 @@ const renderMiddleConstructorElement = (e, index, array) => {
     )
 };
 
-// const fullPriceInitialState = { fullPrice: 0 };
-
-// function reducer(state, action) {
-//   switch (action.type) {
-//     case "sum":
-//       return { fullPrice: action.fullPrice };
-//       case "zero":
-//         return { fullPrice: fullPriceInitialState };
-//     default:
-//       throw new Error(`Wrong type of action: ${action.type}`);
-//   }
-// }
-
 function BurgerConstructor() {
     
 
     const { burgerElements, onOrderButtonClick } = useContext(BurgerContext);
-    // const [fullPriceState, fullPriceDispatcher] = useReducer(reducer, fullPriceInitialState, undefined);
     const prices = [];
     const bunElement = burgerElements.find(e => (e.type === 'bun'));
     const noBunElements = burgerElements.filter(e => (e.type !== 'bun'));
@@ -70,10 +57,10 @@ function BurgerConstructor() {
             {bunElement &&
                 <section className={burgerConstructorStyles.section}>
                     <ul className={burgerConstructorStyles.list + " mt-15 ml-4 mb-10"} >
-                        {renderBunElement(bunElement, true)}
-                        <div className={burgerConstructorStyles.list + " " + burgerConstructorStyles.constructorBox}>
+                        {renderBunElement(bunElement, true)} 
+                        <div key = {Math.random()} className={burgerConstructorStyles.list + " " + burgerConstructorStyles.constructorBox}> 
                             {noBunElements.map(renderMiddleConstructorElement)}
-                        </div>
+                        </div> 
                         {renderBunElement(bunElement, false)}
                     </ul>
                     <OrderBox onOrderButtonClick={onOrderButtonClick} prices={prices} idBurgersElement={idBurgersElement} />

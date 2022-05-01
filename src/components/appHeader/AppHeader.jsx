@@ -8,7 +8,7 @@ function AppHeader() {
 
     return (
         <header className={appHeaderStyles.header + " mt-10 mb-10"}>
-            <nav className={appHeaderStyles.navigator}>
+            <nav>
                 <ul className={appHeaderStyles.list}>
                     <li className={appHeaderStyles.listElement + " pl-5 pr-5 pb-4 pt-4 mr-2"}>
                         <BurgerIcon type="primary" />

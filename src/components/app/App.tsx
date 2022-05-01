@@ -8,11 +8,16 @@ import OrderDetails from '../orderDetails/OrderDetails';
 import IngredientDetails from '../ingredientDetails/IngredientDetails';
 import { baseUrl } from '../../utils/constants';
 import { BurgerContext } from '../../services/burgerContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIngredients } from '../../services/actions/ingredients';
 
 function App() {
 
   const ingredientsUrl = baseUrl + "/ingredients";
   const orderNumberUrl = baseUrl + "/orders";
+
+  //const dispatch = useDispatch();
+  //const { ingredients } = useSelector(state => state.burgerIngredients);
 
   const bunRef = useRef(null);
   const sauceRef = useRef(null);
@@ -46,6 +51,14 @@ function App() {
     hasError: false,
     orderNumberInfo: { name: "", order: { number: 0 }, success: false }
   });
+
+  // useEffect(
+  //   () => {
+  //     dispatch(getIngredients());
+  //   },
+  //   [dispatch]
+  // );
+
   useEffect(() => {
     setState({ ...state, hasError: false, isLoading: true });
     fetch(ingredientsUrl)
@@ -114,7 +127,7 @@ function App() {
           <>
               <AppHeader />
               <main className={appStyles.main}>
-              <BurgerContext.Provider value={{ burgerElements: ingredients.data, bunRef: bunRef, sauceRef: sauceRef, mainRef: mainRef}}>
+              <BurgerContext.Provider value={{ burgerElements: ingredients.data, onOrderButtonClick: onOrderDetailsClick, bunRef: bunRef, sauceRef: sauceRef, mainRef: mainRef}}>
                 <BurgerIngredients burgerIngredients={ingredients.data} onIngredientClick={onIngredientDetailsClick} />
                 <BurgerConstructor />
               </BurgerContext.Provider>
