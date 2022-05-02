@@ -10,24 +10,26 @@ import { baseUrl } from '../../utils/constants';
 import { BurgerContext } from '../../services/burgerContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredients } from '../../services/actions/ingredients';
-
+import { store } from '../../services/store';
 function App() {
 
+  
   const ingredientsUrl = baseUrl + "/ingredients";
   const orderNumberUrl = baseUrl + "/orders";
 
-  //const dispatch = useDispatch();
-  //const { ingredients } = useSelector(state => state.burgerIngredients);
+  // const dispatch = useDispatch();
+  // type RootState = ReturnType<typeof store.getState>;
+  // const { ingredients } = useSelector((state:RootState) => state.burgerIngredients);
 
   const bunRef = useRef(null);
   const sauceRef = useRef(null);
   const mainRef = useRef(null);
 
-  const [state, setState] = useState({
-    isLoading: false,
-    hasError: false,
-    ingredients: { data: [], success: false }
-  });
+   const [state, setState] = useState({
+     isLoading: false,
+     hasError: false,
+     ingredients: { data: [], success: false }
+   });
 
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false);
   const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = useState(false);
@@ -52,22 +54,22 @@ function App() {
     orderNumberInfo: { name: "", order: { number: 0 }, success: false }
   });
 
-  // useEffect(
-  //   () => {
-  //     dispatch(getIngredients());
-  //   },
-  //   [dispatch]
-  // );
+  //  useEffect(
+  //    () => {
+  //      dispatch(getIngredients());
+  //    },
+  //    [dispatch]
+  //  );
 
-  useEffect(() => {
-    setState({ ...state, hasError: false, isLoading: true });
-    fetch(ingredientsUrl)
-      .then(checkResponse)
-      .then(ingredients => setState({ ...state, ingredients, isLoading: false }))
-      .catch(e => {
-        setState({ ...state, hasError: true, isLoading: false });
-      });
-  }, []);
+   useEffect(() => {
+     setState({ ...state, hasError: false, isLoading: true });
+     fetch(ingredientsUrl)
+       .then(checkResponse)
+       .then(ingredients => setState({ ...state, ingredients, isLoading: false }))
+       .catch(e => {
+         setState({ ...state, hasError: true, isLoading: false });
+       });
+   }, []);
 
   const { ingredients, isLoading, hasError } = state;
 
@@ -119,11 +121,12 @@ function App() {
       }
 
       <div className={appStyles.page}>
-        {isLoading && 'Загрузка...'}
+         {isLoading && 'Загрузка...'}
         {hasError && 'Произошла ошибка'}
         {!isLoading &&
           !hasError &&
-          (ingredients.data.length !== 0) &&
+          (ingredients.data.length !== 0) && 
+        
           <>
               <AppHeader />
               <main className={appStyles.main}>

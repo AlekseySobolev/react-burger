@@ -20,6 +20,9 @@ export const ingredientsReducer = (state = ingredientsInitialState, action) =>{
         case GET_INGREDIENTS_ERROR: {
           return { ...state, ingredientsFailed: true, ingredientsRequest: false };
         }
+        default:
+          return state
+        
     }
 }
 

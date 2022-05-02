@@ -25,7 +25,8 @@ function Modal({ title, onClose, children }) {
 
     return ReactDOM.createPortal(
         <>
-            <div className={children.type.name === "IngredientDetails" ? Styles.ingredientModal : Styles.orderModal}>
+            {/* <div className={children.type.name === "IngredientDetails" ? Styles.ingredientModal : Styles.orderModal}> */}
+            <div className= {Styles.modal}>
                 <div className={Styles.dataBox + ' ' + "ml-10 mb-15 mr-10 mt-10"}>
                     <div className={Styles.buttonBox}>
                         <h1 className={"text text_type_main-large"}>{title}</h1>

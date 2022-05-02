@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 //import PropTypes from 'prop-types';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -27,16 +27,14 @@ const renderMiddleConstructorElement = (e) => {
     const isMiddle = e.type === "bun" ? false : true;
 
     return (
-        <>
+        <React.Fragment key ={e._id}>
             {isMiddle &&
-                <li key={e._id} className={burgerConstructorStyles.middleListElement + " mr-2"}>  {/* Непонимиаю почему возникает ошибка. Warning: Each child in a list should have a unique "key" prop.
-
-                                                                                                Check the render method of `BurgerConstructor`. See https://reactjs.org/link/warning-keys for more information.*/}
+                <li className={burgerConstructorStyles.middleListElement + " mr-2"}>  
                     <DragIcon type="primary" />
                     <ConstructorElement isLocked={!isMiddle} text={e.name} price={e.price} thumbnail={e.image} />
                 </li>
             }
-        </>
+        </React.Fragment>
     )
 };
 
