@@ -5,21 +5,26 @@ import Ingredient from '../ingredient/Ingredient.jsx';
 import burgerIngredientsStyles from './burgerIngredients.module.css';
 import { ingredientType } from '../../utils/constants.js';
 import { BurgerContext } from '../../services/burgerContext.js';
+import { useSelector } from 'react-redux';
 
-function BurgerIngredients({burgerIngredients, onIngredientClick}) {
 
-    const bunIngredients = burgerIngredients.filter(e => e.type === 'bun');
-    const sauceIngredients = burgerIngredients.filter(e => e.type === 'sauce');
-    const mainIngredients = burgerIngredients.filter(e => e.type === 'main');
+function BurgerIngredients() {
+
+    const { ingredients } = useSelector(state => state.burgerIngredients);
+    const bunIngredients = ingredients.filter(e => e.type === 'bun');
+    const sauceIngredients = ingredients.filter(e => e.type === 'sauce');
+    const mainIngredients = ingredients.filter(e => e.type === 'main');
 
     // const bunRef = useRef(null);
     // const sauceRef = useRef(null);
     // const mainRef = useRef(null);
+
     const { bunRef, sauceRef, mainRef } = useContext(BurgerContext);
 
     const renderIngredient = (e) => {
         return (
-            <li key={e._id} className={burgerIngredientsStyles.listElement} onClick={() => onIngredientClick(e)}>
+            // <li key={e._id} className={burgerIngredientsStyles.listElement} onClick={() => onIngredientClick(e)}>
+            <li key={e._id} className={burgerIngredientsStyles.listElement}>
                 <Ingredient image={e.image} name={e.name} price={e.price} />
             </li>
         )
@@ -59,9 +64,9 @@ function BurgerIngredients({burgerIngredients, onIngredientClick}) {
 //     data: PropTypes.arrayOf(ingredientType),
 // });
 
-BurgerIngredients.propTypes = {
-    burgerIngredients: PropTypes.arrayOf(ingredientType).isRequired,
-    onIngredientClick: PropTypes.func.isRequired
-}
+// BurgerIngredients.propTypes = {
+//     burgerIngredients: PropTypes.arrayOf(ingredientType).isRequired,
+//     onIngredientClick: PropTypes.func.isRequired
+// }
 
 export default BurgerIngredients;

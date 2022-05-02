@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
-//import PropTypes from 'prop-types';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderBox from '../orderBox/OrderBox.jsx';
 import burgerConstructorStyles from './burgerConstructor.module.css';
-//import { ingredientType } from '../../utils/constants.js';
 import { baseUrl } from '../../utils/constants';
 import { BurgerContext } from '../../services/burgerContext.js';
 

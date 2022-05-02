@@ -1,9 +1,9 @@
-import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_ERROR } from '../actions/ingredients';
+import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_OREDERDESCRIPTION_ERROR } from '../actions/orderDescription';
 
 const ingredientsInitialState = {
     ingredients: [],
     ingredientsRequest: false,
-    ingredientsFailed: false
+    ingredientsFailed: false,
 }
 
 export const ingredientsReducer = (state = ingredientsInitialState, action) =>{
