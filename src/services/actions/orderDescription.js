@@ -1,26 +1,19 @@
 import { baseUrl } from "../../utils/constants";
+import { checkResponse } from "../../utils/functions";
 
 export const GET_OREDERDESCRIPTION_REQUEST = "GET_OREDERDESCRIPTION_REQUEST";
 export const GET_OREDERDESCRIPTION_SUCCESS = "GET_OREDERDESCRIPTION_SUCCESS";
 export const GET_OREDERDESCRIPTION_ERROR = "GET_OREDERDESCRIPTION_ERROR";
 
-const ingredientsUrl = baseUrl + "/orders";
+const orderNumberUrl = baseUrl + "/orders";
 
-const checkResponse = (response) => {
-  if (!response.ok) {
-    throw new Error("Error occurred!")
-  }
-  return response.json()
-
-}
-
-export function getIngredients(idBurgersElement) {
+export function getOrderDescription(idBurgersElement) {
 
     return function(dispatch) {
       dispatch({
         type: GET_OREDERDESCRIPTION_REQUEST
       });
-     fetch(ingredientsUrl, {
+     fetch(orderNumberUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -33,12 +26,12 @@ export function getIngredients(idBurgersElement) {
      .then(res => {
         if (res && res.success) {
           dispatch({
-            type: GET_OREDERDESCRIPTION_ERROR,
-            ingredients: res.data
+            type: GET_OREDERDESCRIPTION_SUCCESS,
+            orderDescription: res
           });
         } else {
           dispatch({
-            type: GET_OREDERDESCRIPTION_ERROR,
+            type: GET_OREDERDESCRIPTION_ERROR
           });
         }
       })

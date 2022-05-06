@@ -14,6 +14,23 @@
     list-style-type:none;
     
 }
+.onHoverList{
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style-type:none;
+    border: #8585AD solid 2px;  
+    border-radius: 20px;  
+}
+.emptyList{
+    min-height: 720px;   
+}
+.onHoverLEmptyist{
+    min-height: 720px; 
+    border: #8585AD solid 2px;  
+    border-radius: 20px;       
+}
 .listElement{
     display: flex;
     align-items: center;
@@ -34,6 +51,16 @@
     display: flex;
     
 }
+
+.p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+    color: #8585AD;
+    margin-bottom: 20px;
+  }
 
 /* полоса прокрутки (скроллбар) */
 ::-webkit-scrollbar {

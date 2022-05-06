@@ -1,14 +1,51 @@
 //import PropTypes from 'prop-types';
-import { useState, useContext } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import tabListStyles from './tablList.module.css';
-import { BurgerContext } from '../../services/burgerContext';
 
-function TabList() {
+function useInView(ref) {
+  const [isInView, setIsInView] = useState(false);
+  const observerRef = useRef(null);
 
-  const { bunRef, sauceRef, mainRef } = useContext(BurgerContext);
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(([entry]) =>
+        setIsInView(entry.isIntersecting),
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.2
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    observerRef.current.observe(ref.current)
+    return () => {
+      observerRef.current.disconnect()
+    };
+  }, [ref])
+
+  return isInView
+}
+
+function TabList({ bunRef, sauceRef, mainRef } ) {
 
   const [currentTab, setCurrent] = useState('one');
+
+  const bunInView = useInView(bunRef)
+  const sauceInView = useInView(sauceRef)
+  const mainInView = useInView(mainRef)
+
+  useEffect(() => {
+    if (bunInView) {
+      setCurrent('one')
+    } else if (sauceInView) {
+      setCurrent('two')
+    } else {
+      setCurrent('three')
+    }
+  }, [bunInView, sauceInView, mainInView])
+
 
   const onTabClick = (e) => {
     setCurrent(e);

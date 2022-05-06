@@ -1,7 +1,10 @@
 import orderDetailsStyles from './orderDetails.module.css';
 import done from '../../images/done.png';
+import { useSelector } from 'react-redux';
+function OrderDetails() {
 
-function OrderDetails({orderNumber}) {
+    const { orderDescription } = useSelector(state => state.orderDescription);
+    const orderNumber = orderDescription?.order?.number;
 
     return ( 
             <div className={orderDetailsStyles.infoBox + " mt-9"}>
