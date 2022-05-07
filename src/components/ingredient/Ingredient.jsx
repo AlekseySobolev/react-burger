@@ -6,7 +6,7 @@ import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from 'react-dnd';
 import { ingredientType } from '../../utils/constants';
 
-function Ingredient({ ingredient }) {
+function Ingredient({ ingredient, onIngredientClick }) {
 
         const { image, price, name, __v } = ingredient;
 
@@ -19,20 +19,22 @@ function Ingredient({ ingredient }) {
         });
 
         return (
-                <div style={{ opacity }}>
-                        <img className={"mb-1 mr-4 ml-4"} src={image} ref ={dragRef}></img>
+
+                <li style={{ opacity }} className={ingredientStyles.listElement} onClick={() => onIngredientClick(ingredient)}>
+                        <img className={"mb-1 mr-4 ml-4"} src={image} ref={dragRef}></img>
                         <div className={ingredientStyles.container + " mb-1"} >
                                 <p className={ingredientStyles.paragraph + " text text_type_digits-default"}>{price}</p>
                                 <CurrencyIcon type="primary" />
                         </div>
                         <p className={ingredientStyles.p + " text text_type_main-default mb-6"}>{name}</p>
-                        <Counter count={__v} size="default"/>
-                </div>
+                        <Counter count={__v} size="default" />
+                </li>
         );
 }
 
 Ingredient.propTypes = PropTypes.shape({
-        ingredient: ingredientType
+        ingredient: ingredientType,
+        onIngredientClick: PropTypes.func.isRequired
 })
 
 export default Ingredient;

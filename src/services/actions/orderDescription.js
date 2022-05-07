@@ -34,6 +34,8 @@ export function getOrderDescription(idBurgersElement) {
             type: GET_OREDERDESCRIPTION_ERROR
           });
         }
+      }).catch(err =>{
+        console.log("Error occured!");
       })
     };
     

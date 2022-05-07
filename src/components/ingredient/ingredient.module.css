@@ -11,4 +11,8 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}.listElement{
+    text-align: center;
+    position: relative;
+    cursor: pointer;  
 }

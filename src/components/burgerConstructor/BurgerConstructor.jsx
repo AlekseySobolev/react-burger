@@ -36,9 +36,7 @@ const renderMiddleConstructorElement = (ingredientWithUuid, index, deleteIngredi
             {
                 ingredientWithUuid &&
                 isMiddle &&
-                <li className={burgerConstructorStyles.middleListElement + " mr-2"} >
                     <ConstructorIngredient index = {index} ingredientWithUuid={ingredientWithUuid} isMiddle={isMiddle} deleteIngredientInConstructor={deleteIngredientInConstructor} />
-                </li>
             }
         </React.Fragment>
     )
@@ -84,6 +82,7 @@ function BurgerConstructor({ onOrderButtonClick }) {
     }
 
     const prices = [];
+
     const bunElement = constructorIngredients?.find(e => (e.ingredient.type === 'bun'));
     const noBunElements = constructorIngredients?.filter(e => (e.ingredient.type !== 'bun'));
 
@@ -118,7 +117,7 @@ function BurgerConstructor({ onOrderButtonClick }) {
                         renderBunElement(bunElement, true)}
 
                     <div key={Math.random()} className={burgerConstructorStyles.list + " " + burgerConstructorStyles.constructorBox}>
-                        {noBunElements.map((noBunElement, index) => (renderMiddleConstructorElement(noBunElement, index, deleteIngredientInConstructor)))}
+                        {noBunElements.map((noBunElement, index) => (renderMiddleConstructorElement(noBunElement, ++index, deleteIngredientInConstructor)))}
                     </div>
 
                     {bunElement &&

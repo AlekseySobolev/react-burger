@@ -1,10 +1,9 @@
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useRef } from 'react';
 import TabList from '../tabList/TabList.jsx';
 import Ingredient from '../ingredient/Ingredient.jsx';
 import burgerIngredientsStyles from './burgerIngredients.module.css';
 import { useSelector } from 'react-redux';
-import { useInView } from 'react-intersection-observer';
 
 function BurgerIngredients({ onIngredientClick }) {
 
@@ -21,10 +20,12 @@ function BurgerIngredients({ onIngredientClick }) {
     const renderIngredient = (ingredient) => {
 
         return (
-
-            <li key={ingredient._id} className={burgerIngredientsStyles.listElement} onClick={() => onIngredientClick(ingredient)}>
-                <Ingredient ingredient={ingredient} />
-            </li>
+            <React.Fragment key={ingredient._id}> 
+            {/* опять не понимаю, почему появляется и как убрать index.js:1 Warning: Failed prop type: The prop `isRequired` is marked as required in `Ingredient`, but its value is `undefined`.*/}
+               {ingredient &&
+                    <Ingredient  ingredient={ingredient}  onIngredientClick={onIngredientClick}/>
+                }
+            </React.Fragment>
 
         )
 
