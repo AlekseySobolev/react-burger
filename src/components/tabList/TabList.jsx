@@ -1,4 +1,4 @@
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useState, useRef, useEffect } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import tabListStyles from './tablList.module.css';
@@ -30,11 +30,11 @@ function useInView(ref) {
 
 function TabList({ bunRef, sauceRef, mainRef } ) {
 
-  const [currentTab, setCurrent] = useState('one');
+  const bunInView = useInView(bunRef);
+  const sauceInView = useInView(sauceRef);
+  const mainInView = useInView(mainRef);
 
-  const bunInView = useInView(bunRef)
-  const sauceInView = useInView(sauceRef)
-  const mainInView = useInView(mainRef)
+  const [currentTab, setCurrent] = useState('one');
 
   useEffect(() => {
     if (bunInView) {
@@ -83,12 +83,12 @@ function TabList({ bunRef, sauceRef, mainRef } ) {
 
 }
 
-// TabList.propTypes = PropTypes.shape(
-//   {
-//     bunRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-//     sauceRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-//     mainRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) })
-//   }
-// )
+TabList.propTypes = PropTypes.shape(
+  {
+    bunRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+    sauceRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+    mainRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) })
+  }
+)
 
 export default TabList;

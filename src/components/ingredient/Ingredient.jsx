@@ -34,7 +34,7 @@ function Ingredient({ ingredient, onIngredientClick }) {
 
 Ingredient.propTypes = PropTypes.shape({
         ingredient: ingredientType,
-        onIngredientClick: PropTypes.func.isRequired
+        onIngredientClick: PropTypes.func
 })
 
 export default Ingredient;

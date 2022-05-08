@@ -46,7 +46,9 @@ export function getIngredients() {
           });
         }
       }).catch(err =>{
-        console.log(`Error: ${err}`);
+        dispatch({
+          type: GET_INGREDIENTS_ERROR,
+        });
       })
     };
     

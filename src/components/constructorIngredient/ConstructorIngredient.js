@@ -5,7 +5,9 @@ import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd';
 import { changeIngredientPosition } from '../../services/actions/ingredients';
+import { ingredientType } from '../../utils/constants';
 import Styles from './constructorIngredient.module.css';
+
 function ConstructorIngredient({ ingredientWithUuid, index, isMiddle, deleteIngredientInConstructor }) {
     const ref = useRef();
     const { ingredient } = ingredientWithUuid;
@@ -43,7 +45,10 @@ function ConstructorIngredient({ ingredientWithUuid, index, isMiddle, deleteIngr
 }
 
 ConstructorIngredient.propTypes = {
-    ingredientWithUuid: PropTypes.string.isRequired,
+    ingredientWithUuid: PropTypes.shape({
+        ingredient: ingredientType,
+        uuid: PropTypes.string.isRequired
+}),
     index: PropTypes.number.isRequired,
     isMiddle: PropTypes.bool.isRequired,
     deleteIngredientInConstructor: PropTypes.func.isRequired
