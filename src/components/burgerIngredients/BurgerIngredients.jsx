@@ -21,7 +21,6 @@ function BurgerIngredients({ onIngredientClick }) {
 
         return (
             <React.Fragment key = {ingredient._id}>
-                 {/*  так и не понял как победить ошибку(подсказанные в чате решения не помогли), Failed prop type: The prop `isRequired` is marked as required in `Ingredient`, but its value is `undefined`. */}
                 {ingredient &&
                     <Ingredient  ingredient={ingredient} onIngredientClick={onIngredientClick} />
                 }
@@ -36,7 +35,6 @@ function BurgerIngredients({ onIngredientClick }) {
                 <section className={burgerIngredientsStyles.section}>
 
                     <h1 className={burgerIngredientsStyles.h1 + " text text_type_main-large mb-5"}>Соберите бургер</h1>
-                      {/*  так и не понял как победить ошибку(подсказанные в чате решения не помогли), Failed prop type: The prop `isRequired` is marked as required in `TabList`, but its value is `undefined`. */}
                     <TabList bunRef={bunRef} sauceRef={sauceRef} mainRef={mainRef} />
                     <div className={burgerIngredientsStyles.ingredientBox + " mt-10"}>
                         <section className={burgerIngredientsStyles.ingredientSection} ref={bunRef}>
