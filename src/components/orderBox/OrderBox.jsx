@@ -3,13 +3,12 @@ import orderBoxStyles from './orderBox.module.css';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function OrderBox({ onOrderButtonClick, prices, idBurgersElement }) {
+function OrderBox({ onOrderButtonClick, prices, idBurgersElement}) {
 
         
     const fullPrice = prices.reduce((currentSum, currentNumber) => {
         return currentSum + currentNumber
     }, 0);
-
         return (
 
                 <div className={orderBoxStyles.orderButton}>

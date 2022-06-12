@@ -1,0 +1,78 @@
+.leftSection{
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+}
+.rightSection{
+    min-width: 480px;
+}
+.nav{
+    display:  flex;
+    flex-direction: column;
+}
+
+.navLink{
+    color: inherit;
+    text-decoration: none;
+    cursor:pointer;
+}
+.navLink:hover{
+    opacity: 0.6;
+}
+.paragraphBox{
+    opacity: 0.6;
+}
+.paragraph{
+    margin-left: 8px;
+}
+
+.form{
+    display: flex;
+    min-width: 920px;
+}
+.inputWrapper,
+.inputWrapper div:not(input + div){
+    width:100%
+}
+.inputBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style-type:none;
+    gap: 24px;
+    width: 100%;
+}
+.buttonBox{
+    visibility: hidden;
+}
+.buttonBox_opened{
+    display: flex;
+    width: 100%;
+    justify-content: right;
+    align-items: center;
+    visibility: visible;
+}
+
+.link{
+    color: #4C4CFF;
+    text-decoration: none;
+    cursor:pointer;
+}
+.link:hover{
+    opacity: 0.6;
+}
+
+.activelink{
+    text-decoration: none;
+    cursor:pointer;
+}
+.unactivelink{
+    text-decoration: none;
+    cursor:pointer;
+}
+.activelink:hover{
+    opacity: 0.6;
+}
+.unactivelink:hover{
+    opacity: 0.6;
+}

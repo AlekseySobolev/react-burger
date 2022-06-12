@@ -1,13 +1,22 @@
-import ingredientDetailsStyles from './ingredientDetails.module.css';
+import ingredientDetailsStyles from './ingredientDetailsPage.module.css';
+import RouterModal from '../../components/routerModal/RouterModal';
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
 
-function IngredientDetails() {
+function IngredientDetailsPage({ onClose, isRouter }) {
+    const {id : ingredientId } = useParams();
+    const { ingredients } = useSelector(state=>state.burgerIngredients);
 
-    const { ingredientDescription } = useSelector(state => state.ingredientDescription);
-
+    const ingredientDescription = useMemo(
+    () => ingredients.find(ingredient => ingredient._id === ingredientId)
+    , [ingredientId, ingredients])
+    
     return (
         <>
+        <p>Тест</p>
         {ingredientDescription &&
+            <RouterModal title={"Детали ингредиента"} isRouter={isRouter} onClose={onClose}>
             <div className={ingredientDetailsStyles.ingredientDataBox}>
                 <img className={"mb-4 pl-5 pr-5"} src={ingredientDescription.image_large} alt="Изображение ингредиента" />
                 <h2 className={ingredientDetailsStyles.h2 + " text text_type_main-medium"}>{ingredientDescription.name}</h2>
@@ -30,10 +39,10 @@ function IngredientDetails() {
                     </div>
                 </div>
             </div>
-
+            </RouterModal>
         }
         </>
     )
 }
 
-export default IngredientDetails
+export default IngredientDetailsPage

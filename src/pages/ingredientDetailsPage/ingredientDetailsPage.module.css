@@ -1,0 +1,21 @@
+.h2{
+    margin: 0 auto;
+}
+.ingredientDataBox {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+.caloriesBox {
+    display: flex;
+    gap: 20px; 
+
+}
+.infoBox {
+    display: flex;
+    min-width: 120px;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+}

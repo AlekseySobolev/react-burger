@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import ConstructorIngredient from '../constructorIngredient/ConstructorIngredient.js';
+import ConstructorIngredient from '../constructorIngredient/ConstructorIngredient.jsx';
 import OrderBox from '../orderBox/OrderBox.jsx';
 import burgerConstructorStyles from './burgerConstructor.module.css';
 import { useSelector, useDispatch } from 'react-redux';

@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
+import AppHeader from '../appHeader/AppHeader';
 import { useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom';
+import Styles from './routerModal.module.css'
 import ModalOverlay from '../modalOverlay/ModalOverlay';
-import Styles from './modal.module.css';
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const modalsContainer = document.querySelector('#modals');
 
-function Modal({ title, onClose, isRouter, children }) {
+function RouterModal({ title, children, onClose, isRouter, isProfilePage = false}) {
 
     const handleEscKeydown = useCallback(
         (event) => {
@@ -25,26 +25,23 @@ function Modal({ title, onClose, isRouter, children }) {
 
     return ReactDOM.createPortal(
         <>
-            <div className= {Styles.modal}>
-                <div className={Styles.dataBox + ' ' + "ml-10 mb-15 mr-10 mt-10"}>
-                    <div className={Styles.buttonBox}>
-                        <h1 className={"text text_type_main-large"}>{title}</h1>
-                        <button className={Styles.button} type='button' onClick={() => onClose()}><CloseIcon type="primary" /></button>
-                    </div>
+            <div className={Styles.wrapper}>
+                <AppHeader />
+                <div className={ isProfilePage ? Styles.profilePageContainer : Styles.container}>
+                    <h1 className={"text text_type_main-medium"}>{title}</h1>
                     {children}
                 </div>
             </div>
-            <ModalOverlay onClose={onClose} isRouter={isRouter}/>
+            <ModalOverlay isRouter={isRouter}/>
         </>,
         modalsContainer
     );
 }
 
-Modal.propTypes = {
+RouterModal.propTypes = {
     title: PropTypes.string.isRequired,
     onClose: PropTypes.func.isRequired,
-    isRouter: PropTypes.bool.isRequired,
     children: PropTypes.element.isRequired
 }
 
-export default Modal;
+export default RouterModal;

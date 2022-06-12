@@ -13,6 +13,7 @@ export function getOrderDescription(idBurgersElement) {
       dispatch({
         type: GET_OREDERDESCRIPTION_REQUEST
       });
+      
      fetch(orderNumberUrl, {
         method: 'POST',
         headers: {
