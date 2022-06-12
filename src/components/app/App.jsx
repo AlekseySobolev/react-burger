@@ -1,19 +1,13 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import appStyles from './app.module.css';
-import AppHeader from '../appHeader/AppHeader.jsx';
-import BurgerIngredients from '../burgerIngredients/BurgerIngredients.jsx';
-import BurgerConstructor from '../burgerConstructor/BurgerConstructor.jsx';
 import Modal from '../modal/Modal';
 import OrderDetails from '../orderDetails/OrderDetails';
 import IngredientDetails from '../ingredientDetails/IngredientDetails';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredients } from '../../services/actions/ingredients';
 import { getOrderDescription } from '../../services/actions/orderDescription';
-import { store } from '../../services/store';
 import { SET_INGREDIENT_DESCRIPTION } from '../../services/actions/ingredientDescription';
 import { REMOVE_INGREDIENT_DESCRIPTION } from '../../services/actions/ingredientDescription';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import MainPage from '../../pages/mainPage/MainPage';
 import RegistrationPage from '../../pages/registrationPage/RegistrationPage';
@@ -70,15 +64,14 @@ function App() {
     []
   );
 
-  const closeAllModals = useCallback(() => {
-
+  const closeAllModals = () => {
     setIsOrderDetailsOpened(false);
     setIsIngredientDetailsOpened(false);
     if (ingredientDescription) {
       dispatch({ type: REMOVE_INGREDIENT_DESCRIPTION });
+      navigate(-1);
     }
-    navigate(-1);
-  },navigate);
+  }
 
   const onIngredientDetailsClick = (clickedIngredient) => {
 
@@ -130,25 +123,27 @@ function App() {
           <>
             <Routes location={background || location}>
 
-              <Route path="/login" element={<LoginPage onClose={closeAllModals} isRouter={true} />} />
-              <Route path="/register" element={<RegistrationPage onClose={closeAllModals} isRouter={true} />} />
-              <Route path="/forgot-password" element={<ForgotPasswordPage onClose={closeAllModals} isRouter={true} />} />
-              <Route path="/reset-password" element={<ResetPasswordPage onClose={closeAllModals} isRouter={true} />} />
+              <Route path="/login" element={<LoginPage isRouter={true} />} />
+              <Route path="/register" element={<RegistrationPage isRouter={true} />} />
+              <Route path="/forgot-password" element={<ForgotPasswordPage isRouter={true} />} />
+              <Route path="/reset-password" element={<ResetPasswordPage isRouter={true} />} />
               <Route path="/" element={<MainPage onIngredientClick={onIngredientDetailsClick} onOrderButtonClick={onOrderDetailsClick} />} />
-              <Route path="/ingredients/:id" element={<IngredientDetailsPage onClose={closeAllModals} isRouter={true}/>} />
-              <Route path="/stackOrder" element={<StackOrderPage onClose={closeAllModals} isRouter={true} />} />
+              <Route path="/ingredients/:id" element={<IngredientDetailsPage isRouter={true} />} />
+              <Route path="/stackOrder" element={<StackOrderPage isRouter={true} />} />
 
               <Route path="/profile" element={
                 <ProtectedRoute>
                   <ProfilePage isRouter={true} />
-                </ProtectedRoute>} />
+                </ProtectedRoute>
+              } />
+              <Route path="/profile/orders" element={
+                <ProtectedRoute>
+                  <OrderHistoryPage isRouter={true} />
+                </ProtectedRoute>
+              } />
 
-                <Route path="/profile/orders" element={
-                  <OrderHistoryPage isRouter={true} />}/>
             </Routes>
 
-            
-         
 
           </>
         }

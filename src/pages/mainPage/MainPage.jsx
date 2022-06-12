@@ -5,12 +5,9 @@ import BurgerConstructor from '../../components/burgerConstructor/BurgerConstruc
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import Styles from './mainPage.module.css';
-import { useLocation } from 'react-router-dom';
 
 function MainPage({onIngredientClick, onOrderButtonClick }) {
 
-    const location = useLocation();
-    const background = location.state?.background;
     return (
         <>
             <AppHeader />

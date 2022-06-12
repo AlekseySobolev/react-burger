@@ -1,38 +1,32 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import Styles from './orderHistoryPage.module.css';
 import RouterModal from '../../components/routerModal/RouterModal';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getEditUserRequest, getLogoutRequest, getUserRequest } from '../../services/actions/auth';
+import PropTypes from 'prop-types';
 
 function OrderHistoryPage({ isRouter }) {
-
-    const { user, password} = useSelector(state => state.auth);
 
     const dispath = useDispatch();
 
     const unactiveLink = Styles.activeLink + " text text_type_main-medium text_color_inactive";
     const activeLink = Styles.unactiveLink + " text text_type_main-medium";
-    const [form, setValue] = useState({ name: user.name, email: user.email, password: password});
-
-    const onChange = e =>{
-        setValue({...form, [e.target.name]: e.target.value});
-    }
 
     const onLogoutClick = () =>{
         dispath(getLogoutRequest(localStorage.getItem('refreshToken')));
     }
-    const onCancelClick = () =>{
-        dispath(getUserRequest(form));
-    }
+    // const onCancelClick = () =>{
+    //     dispath(getUserRequest(form));
+    // }
 
-    const onSubmit = () =>{
-        dispath(getEditUserRequest(form));   
-    }
+    // const onSubmit = () =>{
+    //     dispath(getEditUserRequest(form));   
+    // }
     return (
         <RouterModal title={""} isRouter={isRouter} isProfilePage={true}>
-            <form className={Styles.form + " mt-30"} onSubmit={onSubmit}>
+            <form className={Styles.form + " mt-30"}>
                 <section className={Styles.leftSection + " ml-5 mr-15"}>
 
                     <nav className={Styles.nav}>
@@ -70,6 +64,10 @@ function OrderHistoryPage({ isRouter }) {
             </form>
         </RouterModal>
     );
+}
+
+OrderHistoryPage.propTypes = {
+    isRouter: PropTypes.bool.isRequired
 }
 
 export default OrderHistoryPage;

@@ -5,8 +5,9 @@ import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-component
 import { Link, Navigate, useLocation, useNavigate} from 'react-router-dom';
 import { getLoginRequest } from '../../services/actions/auth';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
-function LoginPage({ onClose, isRouter}) {
+function LoginPage({ isRouter }) {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -31,7 +32,7 @@ function LoginPage({ onClose, isRouter}) {
     }
 
     return (
-        <RouterModal title={"Вход"} isRouter={isRouter} onClose={onClose}>
+        <RouterModal title={"Вход"} isRouter={isRouter}>
             <form className={Styles.form} onSubmit={onSubmit}>
                 <div className={Styles.inputBox + ' ' + "mt-6 mb-6"}>
 
@@ -50,6 +51,10 @@ function LoginPage({ onClose, isRouter}) {
             </form>
         </RouterModal>
     );
+}
+
+LoginPage.propTypes = {
+    isRouter: PropTypes.bool.isRequired
 }
 
 export default LoginPage;

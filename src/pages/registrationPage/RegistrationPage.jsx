@@ -2,11 +2,12 @@ import React, { useCallback, useState } from 'react';
 import Styles from './registrationPage.module.css';
 import RouterModal from   '../../components/routerModal/RouterModal';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { getRegisterRequest } from '../../services/actions/auth';
+import PropTypes from 'prop-types';
 
-function RegistrationPage({ onClose, isRouter }) {
+function RegistrationPage({ isRouter }) {
 
     const [form, setValue] = useState({ name: '', email: '', password: '' });
     
@@ -23,7 +24,7 @@ function RegistrationPage({ onClose, isRouter }) {
     }
 
     return (
-        <RouterModal title={"Регистрация"} isRouter={isRouter} onClose={onClose}>
+        <RouterModal title={"Регистрация"} isRouter={isRouter}>
             <form className={Styles.form} onSubmit={onSubmit}>
                 <div className={Styles.inputBox + ' ' + "mt-6 mb-6"}>
                     <div className={Styles.inputWrapper}>
@@ -41,6 +42,10 @@ function RegistrationPage({ onClose, isRouter }) {
             </form>
         </RouterModal>
     );
+}
+
+RegistrationPage.propTypes = {
+    isRouter: PropTypes.bool.isRequired
 }
 
 export default RegistrationPage;

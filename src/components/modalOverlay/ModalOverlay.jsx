@@ -10,7 +10,8 @@ function ModalOverlay({onClose, isRouter}){
 }
 
 ModalOverlay.propTypes = {
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  isRouter: PropTypes.bool.isRequired
 }
 
 export default ModalOverlay;

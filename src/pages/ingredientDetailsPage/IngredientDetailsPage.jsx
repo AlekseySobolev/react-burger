@@ -3,8 +3,10 @@ import RouterModal from '../../components/routerModal/RouterModal';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
+import PropTypes from 'prop-types';
 
-function IngredientDetailsPage({ onClose, isRouter }) {
+function IngredientDetailsPage({ isRouter }) {
+    
     const {id : ingredientId } = useParams();
     const { ingredients } = useSelector(state=>state.burgerIngredients);
 
@@ -14,9 +16,8 @@ function IngredientDetailsPage({ onClose, isRouter }) {
     
     return (
         <>
-        <p>Тест</p>
         {ingredientDescription &&
-            <RouterModal title={"Детали ингредиента"} isRouter={isRouter} onClose={onClose}>
+            <RouterModal title={"Детали ингредиента"} isRouter={isRouter}>
             <div className={ingredientDetailsStyles.ingredientDataBox}>
                 <img className={"mb-4 pl-5 pr-5"} src={ingredientDescription.image_large} alt="Изображение ингредиента" />
                 <h2 className={ingredientDetailsStyles.h2 + " text text_type_main-medium"}>{ingredientDescription.name}</h2>
@@ -43,6 +44,10 @@ function IngredientDetailsPage({ onClose, isRouter }) {
         }
         </>
     )
+}
+
+IngredientDetailsPage.propTypes = {
+    isRouter: PropTypes.bool.isRequired
 }
 
 export default IngredientDetailsPage

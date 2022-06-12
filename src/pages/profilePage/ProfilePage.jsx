@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import Styles from './profilePage.module.css';
 import RouterModal from '../../components/routerModal/RouterModal';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getEditUserRequest, getLogoutRequest, getUserRequest } from '../../services/actions/auth';
+import PropTypes from 'prop-types';
 
 function ProfilePage({ isRouter }) {
 
@@ -87,6 +88,10 @@ function ProfilePage({ isRouter }) {
             </form>
         </RouterModal>
     );
+}
+
+ProfilePage.propTypes = {
+    isRouter: PropTypes.bool.isRequired
 }
 
 export default ProfilePage;

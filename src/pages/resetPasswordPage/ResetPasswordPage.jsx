@@ -1,12 +1,13 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import Styles from './resetPasswordPage.module.css';
 import RouterModal from '../../components/routerModal/RouterModal';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getResetPasswordRequest } from '../../services/actions/auth';
+import PropTypes from 'prop-types';
 
-function ResetPasswordPage({ onClose, isRouter }) {
+function ResetPasswordPage({ isRouter }) {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ function ResetPasswordPage({ onClose, isRouter }) {
 
     return (
 
-        <RouterModal title={"Восстановление пароля"} isRouter={isRouter} onClose={onClose}>
+        <RouterModal title={"Восстановление пароля"} isRouter={isRouter}>
             <form className={Styles.form} onSubmit={onSubmit}>
                 <div className={Styles.inputBox + ' ' + "mt-6 mb-6"}>                    
                     <div className={Styles.inputWrapper}>
@@ -44,6 +45,10 @@ function ResetPasswordPage({ onClose, isRouter }) {
             </form>
         </RouterModal>
     );
+}
+
+ResetPasswordPage.propTypes = {
+    isRouter: PropTypes.bool.isRequired
 }
 
 export default ResetPasswordPage;
