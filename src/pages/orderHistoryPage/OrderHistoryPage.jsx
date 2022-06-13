@@ -4,8 +4,27 @@ import RouterModal from '../../components/routerModal/RouterModal';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getEditUserRequest, getLogoutRequest, getUserRequest } from '../../services/actions/auth';
+import { getEditUserRequest, getLogoutRequest } from '../../services/actions/auth';
 import PropTypes from 'prop-types';
+import { ordersData } from '../../utils/constants';
+import OrderElement from '../../components/orderElement/OrderElement';
+
+
+const renderOrderElement = (ingredientWithUuid, isTop) => {
+
+    const { ingredient } = ingredientWithUuid;
+    const lastWord = isTop ? " (верх)" : " (низ)";
+    const typeValue = isTop ? "top" : "bottom";
+    return (
+        <>
+            {ingredient &&
+                <li key={isTop} className={Styles.listElement + " ml-8 mr-2"}>
+                    <OrderElement type={typeValue} isLocked={true} text={ingredient.name + lastWord} price={ingredient.price} thumbnail={ingredient.image} />
+                </li>
+            }
+        </>
+    )
+};
 
 function OrderHistoryPage({ isRouter }) {
 
@@ -17,6 +36,9 @@ function OrderHistoryPage({ isRouter }) {
     const onLogoutClick = () =>{
         dispath(getLogoutRequest(localStorage.getItem('refreshToken')));
     }
+
+    const { orders } = ordersData;
+    console.log(orders);
     // const onCancelClick = () =>{
     //     dispath(getUserRequest(form));
     // }
@@ -56,7 +78,9 @@ function OrderHistoryPage({ isRouter }) {
 
 
                 <section className={Styles.rightSection}>
-
+                     <ul className= {Styles.List}>
+                        {orders.map(renderOrderElement)}
+                     </ul>
                     <div className={Styles.inputBox}>
                      <p>История заказов(тест)</p>   
                     </div>

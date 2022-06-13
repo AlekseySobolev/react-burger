@@ -2,12 +2,14 @@ import React, { useCallback, useState } from 'react';
 import Styles from './registrationPage.module.css';
 import RouterModal from   '../../components/routerModal/RouterModal';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getRegisterRequest } from '../../services/actions/auth';
 import PropTypes from 'prop-types';
 
 function RegistrationPage({ isRouter }) {
+
+    const navigate = useNavigate();
 
     const [form, setValue] = useState({ name: '', email: '', password: '' });
     
@@ -20,7 +22,7 @@ function RegistrationPage({ isRouter }) {
     const onSubmit = (event) =>{
  
         event.preventDefault();
-        dispatch(getRegisterRequest(form));    
+        dispatch(getRegisterRequest(form, ()=>navigate("/")));    
     }
 
     return (

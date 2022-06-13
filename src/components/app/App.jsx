@@ -29,11 +29,6 @@ function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const background = location.state?.background;
-  //type RootState = ReturnType<typeof store.getState>;
-  // const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector((state: RootState) => state.burgerIngredients);
-  // const { orderDescriptionFailed } = useSelector((state: RootState) => state.orderDescription);
-  // const { ingredientDescription } = useSelector((state: RootState) => state.ingredientDescription);
-  // const { isAuth, userRequest } = useSelector((state: RootState) => state.auth);
 
   const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(state => state.burgerIngredients);
   const { orderDescriptionFailed } = useSelector(state => state.orderDescription);
