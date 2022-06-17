@@ -9,6 +9,7 @@ function OrderBox({ onOrderButtonClick, prices, idBurgersElement}) {
     const fullPrice = prices.reduce((currentSum, currentNumber) => {
         return currentSum + currentNumber
     }, 0);
+    
         return (
 
                 <div className={orderBoxStyles.orderButton}>

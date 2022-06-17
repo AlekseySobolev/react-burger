@@ -1,5 +1,5 @@
 import { baseUrl } from "../../utils/constants";
-import { checkResponse } from "../../utils/functions";
+import { checkResponse, getCookie } from "../../utils/functions";
 
 export const GET_OREDERDESCRIPTION_REQUEST = "GET_OREDERDESCRIPTION_REQUEST";
 export const GET_OREDERDESCRIPTION_SUCCESS = "GET_OREDERDESCRIPTION_SUCCESS";
@@ -17,7 +17,8 @@ export function getOrderDescription(idBurgersElement) {
      fetch(orderNumberUrl, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization:  getCookie('accessToken')
         },
         body: JSON.stringify({
           ingredients: idBurgersElement

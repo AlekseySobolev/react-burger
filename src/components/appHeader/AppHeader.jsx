@@ -21,7 +21,7 @@ function AppHeader() {
                         </>
                     )}
                 </NavLink>
-                <NavLink className={appHeaderStyles.navLink + " pl-5 pr-5 pb-4 pt-4 mr-2"} to="/stackOrder">
+                <NavLink className={appHeaderStyles.navLink + " pl-5 pr-5 pb-4 pt-4 mr-2"} to="/feed">
                     {({ isActive }) => (
                         <>
                             <ListIcon type={isActive ? "primary" : "secondary"} />
@@ -50,23 +50,3 @@ function AppHeader() {
 
 export default AppHeader;
 
-
-{/* 
-                <ul className={appHeaderStyles.list}>
-                    <li className={appHeaderStyles.listElement + " pl-5 pr-5 pb-4 pt-4 mr-2"}>
-                        <BurgerIcon type={"secondary"} />
-                        <p className={appHeaderStyles.paragraph + " text text_type_main-default"}> <NavLink className={setActive} to="/" >Конструктор</NavLink> </p>
-
-                    </li>
-                    <li className={appHeaderStyles.listElement + " pl-5 pr-5 pb-4 pt-4 mr-2"}>
-                        <ListIcon type="secondary" />
-                        <p className={appHeaderStyles.paragraph + " text text_type_main-default"}><NavLink className={setActive} to="/StackOrder">Лента&nbsp;заказов</NavLink></p>
-                    </li>
-                    <li className={appHeaderStyles.logoElement + " pb-4 pt-4"}>
-                        <Logo />
-                    </li>
-                    <li className={appHeaderStyles.listElement + " pl-5 pb-4 pt-4"}>
-                        <ProfileIcon type="secondary" />
-                        <p className={appHeaderStyles.paragraph + " text text_type_main-default"}><NavLink className={setActive} to="/profile">Личный&nbsp;кабинет</NavLink></p>
-                    </li>
-                </ul> */}

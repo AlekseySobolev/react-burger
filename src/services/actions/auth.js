@@ -1,4 +1,4 @@
-import { baseUrl, authUrl } from "../../utils/constants";
+import { baseUrl, authUrl, userOrderUrl } from "../../utils/constants";
 import { checkResponse, deleteCookie } from "../../utils/functions";
 import { getCookie, setCookie } from "../../utils/functions";
 export const SEND_REGISTER_REQUEST = "SEND_REGISTER_REQUEST";
@@ -32,6 +32,11 @@ export const SEND_RESET_PASSWORD_ERROR = "SEND_RESET_PASSWORD_ERROR"
 export const SEND_REFRESH_TOKEN_REQUEST = "SEND_REFRESH_TOKEN_REQUEST";
 export const SEND_REFRESH_TOKEN_SUCCESS = "SEND_REFRESH_TOKEN_SUCCESS";
 export const SEND_REFRESH_TOKEN_ERROR = "SEND_REFRESH_TOKEN_ERROR"
+
+export const SEND_USER_ORDER_REQUEST = "SEND_USER_ORDER_REQUEST";
+export const SEND_USER_ORDER_SUCCESS = "SEND_USER_ORDER_SUCCESS";
+export const SEND_USER_ORDER_ERROR = "SEND_USER_ORDER_ERROR";
+
 
 export function getRegisterRequest({name, email, password}, redirect) {
 
@@ -84,7 +89,7 @@ export function getRegisterRequest({name, email, password}, redirect) {
       });
       
      fetch(`${authUrl}/user`, {
-        method: 'SEND',
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           Authorization:  getCookie('accessToken')
@@ -351,3 +356,40 @@ export function getRegisterRequest({name, email, password}, redirect) {
     };
     
   }
+
+  export function getUserOrder(number) {
+
+    return function(dispatch) {
+      dispatch({
+        type: SEND_USER_ORDER_REQUEST
+      });
+     console.log(`${userOrderUrl}/${number}`); 
+     fetch(`${userOrderUrl}/${number}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }
+     })
+     .then(checkResponse)
+     .then(res => {
+        if (res && res.success) {
+          dispatch({
+            type: SEND_USER_ORDER_SUCCESS,
+            userOrderInfo: res.orders
+          });
+          console.log(res.orders.ingredients);
+        } else {
+          dispatch({
+            type: SEND_USER_ORDER_ERROR
+          });
+        }
+      }).catch(err =>{
+        console.log(err);
+        dispatch({
+          type: SEND_USER_ORDER_ERROR
+        });
+      })
+    };
+    
+  }
+

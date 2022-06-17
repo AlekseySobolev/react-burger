@@ -1,3 +1,40 @@
+import { format, formatDistanceToNowStrict, isToday, isYesterday } from "date-fns";
+import ru from "date-fns/locale/ru";
+import { orderColors, orderLocaleStatus } from "./constants";
+
+
+
+
+export const getOrderLocaleStatus = (status) => {
+
+  return orderLocaleStatus[status];
+}
+
+export const getOrderNumberColor = (status) => {
+
+  return orderColors[status];
+}
+
+export const normalizeOrderDate = (date) => {
+
+  const createdAtDate = new Date(date);
+
+  const day = isToday(createdAtDate) 
+  ? `Сегодня`
+  :isYesterday(createdAtDate)
+  ? 'Вчера'
+  :  formatDistanceToNowStrict(createdAtDate, {
+    unit: 'day',
+    addSuffix: true,
+    locale: ru
+  });
+
+   const hours = format(createdAtDate, 'p', {locale: ru});
+   
+   return `${day}, ${hours} i-GMT+3`;
+}
+
+
 export const checkResponse = (response) => {
     if (response.ok) {
       return response.json()

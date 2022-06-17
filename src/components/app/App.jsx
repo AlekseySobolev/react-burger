@@ -15,13 +15,17 @@ import LoginPage from '../../pages/loginPage/LoginPage';
 import ForgotPasswordPage from '../../pages/forgotPasswordPage/ForgotPasswordPage';
 import ResetPasswordPage from '../../pages/resetPasswordPage/ResetPasswordPage';
 import ProfilePage from '../../pages/profilePage/ProfilePage';
-import StackOrderPage from '../../pages/stackOrderPage/StackOrderPage';
 import IngredientDetailsPage from '../../pages/ingredientDetailsPage/IngredientDetailsPage';
 import { getCookie } from '../../utils/functions';
 import ProtectedRoute from '../protectedRoute/ProtectedRoute';
 import { useNavigate } from 'react-router-dom';
 import { getRefreshTokenRequest, getUserRequest } from '../../services/actions/auth';
 import OrderHistoryPage from '../../pages/orderHistoryPage/OrderHistoryPage';
+import FeedPage from '../../pages/feedPage/FeedPage';
+import OrderDoneDetails from '../userOrderDetails/UserOrderDetails';
+import { REMOVE_CLICKED_ORDER, SET_CLICKED_ORDER } from '../../services/actions/userOrderDescription';
+import UserOrderDetails from '../userOrderDetails/UserOrderDetails';
+import UserOrderDetailsPage from '../../pages/userOrderDetailsPage/UserOrderDetailsPage';
 
 function App() {
 
@@ -33,10 +37,12 @@ function App() {
   const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(state => state.burgerIngredients);
   const { orderDescriptionFailed } = useSelector(state => state.orderDescription);
   const { ingredientDescription } = useSelector(state => state.ingredientDescription);
+  // const clickedOrder = useSelector(state => state.clickedOrder);
   const { isAuth, userRequest } = useSelector(state => state.auth);
 
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false);
   const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = useState(false);
+  // const [isOrderDoneDetailsOpened, setIsOrderDoneDetailsOpened] = useState(false);
 
   const checkAuth = () => {
 
@@ -60,11 +66,17 @@ function App() {
   );
 
   const closeAllModals = () => {
+
     setIsOrderDetailsOpened(false);
     setIsIngredientDetailsOpened(false);
+
     if (ingredientDescription) {
-      dispatch({ type: REMOVE_INGREDIENT_DESCRIPTION });
-      navigate(-1);
+      if (ingredientDescription) {
+        dispatch({ type: REMOVE_INGREDIENT_DESCRIPTION });
+        navigate(-1);
+      }
+
+
     }
   }
 
@@ -114,7 +126,7 @@ function App() {
 
         {ingredientsRequest && userRequest && 'Загрузка...'}
         {ingredientsFailed && 'Произошла ошибка'}
-        {!ingredientsRequest && !ingredientsFailed && ingredients.length !== 0 && !userRequest &&
+        {ingredients.length !== 0 &&
           <>
             <Routes location={background || location}>
 
@@ -124,7 +136,14 @@ function App() {
               <Route path="/reset-password" element={<ResetPasswordPage isRouter={true} />} />
               <Route path="/" element={<MainPage onIngredientClick={onIngredientDetailsClick} onOrderButtonClick={onOrderDetailsClick} />} />
               <Route path="/ingredients/:id" element={<IngredientDetailsPage isRouter={true} />} />
-              <Route path="/stackOrder" element={<StackOrderPage isRouter={true} />} />
+              <Route path="/feed" element={<FeedPage isRouter={true} />} />
+              <Route path="/feed/:id" element={<UserOrderDetailsPage isRouter={true} />} />
+
+              <Route path="/profile/orders/:id" element={
+                <ProtectedRoute>
+                  <UserOrderDetailsPage isRouter={true} />
+                </ProtectedRoute>
+              } />
 
               <Route path="/profile" element={
                 <ProtectedRoute>

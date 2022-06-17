@@ -28,7 +28,7 @@ function Modal({ title, onClose, isRouter, children }) {
             <div className= {Styles.modal}>
                 <div className={Styles.dataBox + ' ' + "ml-10 mb-15 mr-10 mt-10"}>
                     <div className={Styles.buttonBox}>
-                        <h1 className={"text text_type_main-large"}>{title}</h1>
+                        <h1 className={"text text_type_main-medium"}>{title}</h1>
                         <button className={Styles.button} type='button' onClick={() => onClose()}><CloseIcon type="primary" /></button>
                     </div>
                     {children}

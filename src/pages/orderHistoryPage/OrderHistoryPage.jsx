@@ -1,92 +1,125 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Styles from './orderHistoryPage.module.css';
 import RouterModal from '../../components/routerModal/RouterModal';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getEditUserRequest, getLogoutRequest } from '../../services/actions/auth';
 import PropTypes from 'prop-types';
-import { ordersData } from '../../utils/constants';
+import { ordersData, ordersUrl } from '../../utils/constants';
 import OrderElement from '../../components/orderElement/OrderElement';
-
-
-const renderOrderElement = (ingredientWithUuid, isTop) => {
-
-    const { ingredient } = ingredientWithUuid;
-    const lastWord = isTop ? " (верх)" : " (низ)";
-    const typeValue = isTop ? "top" : "bottom";
-    return (
-        <>
-            {ingredient &&
-                <li key={isTop} className={Styles.listElement + " ml-8 mr-2"}>
-                    <OrderElement type={typeValue} isLocked={true} text={ingredient.name + lastWord} price={ingredient.price} thumbnail={ingredient.image} />
-                </li>
-            }
-        </>
-    )
-};
+import { wsCloseConnection, wsStartConnection } from '../../services/actions/wsActions';
+import { getCookie } from '../../utils/functions';
+import { REMOVE_CLICKED_ORDER, SET_CLICKED_ORDER } from '../../services/actions/userOrderDescription';
+import UserOrderDetails from '../../components/userOrderDetails/UserOrderDetails';
+import Modal from '../../components/modal/Modal';
 
 function OrderHistoryPage({ isRouter }) {
 
-    const dispath = useDispatch();
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const [isOrderDoneDetailsOpened, setIsOrderDoneDetailsOpened] = useState(false);
+    const { userOrderDescription } = useSelector(state => state.userOrderDescription);
+    const { orders: wsOrders, wsConnected } = useSelector(state => state.feed);
+    const { orders } = wsOrders;
+
+    useEffect(() => {
+        dispatch(wsStartConnection({ wsUrl: `${ordersUrl}`, token: getCookie("accessToken") }));
+
+        return () => {
+            dispatch(wsCloseConnection());
+        }
+    }, [dispatch])
+
 
     const unactiveLink = Styles.activeLink + " text text_type_main-medium text_color_inactive";
     const activeLink = Styles.unactiveLink + " text text_type_main-medium";
 
-    const onLogoutClick = () =>{
-        dispath(getLogoutRequest(localStorage.getItem('refreshToken')));
+    const onLogoutClick = () => {
+        dispatch(getLogoutRequest(localStorage.getItem('refreshToken')));
     }
 
-    const { orders } = ordersData;
-    console.log(orders);
-    // const onCancelClick = () =>{
-    //     dispath(getUserRequest(form));
-    // }
 
-    // const onSubmit = () =>{
-    //     dispath(getEditUserRequest(form));   
-    // }
+    const closeAllModals = () => {
+
+        setIsOrderDoneDetailsOpened(false);
+
+        if (userOrderDescription) {
+            dispatch({ type: REMOVE_CLICKED_ORDER });
+            navigate(-1);
+        }
+    }
+
+    const onUserOrderDetailsClick = (userOrderDescription) => {
+
+        if (userOrderDescription) {
+            dispatch({ type: SET_CLICKED_ORDER, userOrderDescription: userOrderDescription });
+            setIsOrderDoneDetailsOpened(true);
+        }
+
+    };
+
+    const renderOrderElement = (element, index) => {
+        return (
+            <React.Fragment key={index}>
+                <Link className={Styles.link} to={`/profile/orders/${element.number}`} state={{ background: location }}>
+                    <OrderElement element={element} isOrderHistoryPage={true} onUserOrderClick={onUserOrderDetailsClick}/>
+                </Link>
+            </React.Fragment>
+        )
+    };
+
+
     return (
-        <RouterModal title={""} isRouter={isRouter} isProfilePage={true}>
-            <form className={Styles.form + " mt-30"}>
-                <section className={Styles.leftSection + " ml-5 mr-15"}>
+        <>
 
-                    <nav className={Styles.nav}>
-                        <NavLink className={Styles.navLink + " mt-4 mb-4"} to="/profile">
-                       
-                                <p className={unactiveLink}>Профиль</p>
-        
-                        </NavLink>
-                        <NavLink className={Styles.navLink + " mt-4 mb-4"} to="/profile/orders">
-                            {({ isActive }) => (
-                                <p className={isActive ? activeLink : unactiveLink}>История заказов</p>
-                            )}
-                        </NavLink>
-                        <NavLink className={Styles.navLink + " mt-4 mb-4"} to="/login">
-                            {({ isActive }) => (
-                                <p className={isActive ? activeLink : unactiveLink} onClick={onLogoutClick}> Выход</p>
-                            )}
-                        </NavLink>
-                    </nav>
+            {isOrderDoneDetailsOpened && userOrderDescription &&
+                <Modal title={`#${userOrderDescription.number}`} onClose={closeAllModals} isRouter={false}>
+                    <UserOrderDetails />
+                </Modal>
+            }
 
-                    <div className={Styles.paragraphBox + " mt-20"}>
-                        <p className={"text text_type_main-default text_color_inactive"}>В этом разделе вы можете </p>
-                        <p className={"text text_type_main-default text_color_inactive"}>изменить свои персональные данные </p>
-                    </div>
+            {!orders && !wsConnected && 'Загрузка...'}
+            {orders && wsConnected &&
+                <RouterModal title={""} isRouter={isRouter} isProfilePage={true}>
+                    <form className={Styles.form + " mt-10"}>
+                        <section className={Styles.leftSection + " mt-20 ml-5 mr-15"}>
+                            <nav className={Styles.nav}>
+                                <NavLink className={Styles.navLink + " mt-4 mb-4"} to="/profile">
 
-                </section>
+                                    <p className={unactiveLink}>Профиль</p>
 
+                                </NavLink>
+                                <NavLink className={Styles.navLink + " mt-4 mb-4"} to="/profile/orders">
+                                    {({ isActive }) => (
+                                        <p className={isActive ? activeLink : unactiveLink}>История заказов</p>
+                                    )}
+                                </NavLink>
+                                <NavLink className={Styles.navLink + " mt-4 mb-4"} to="/login">
+                                    {({ isActive }) => (
+                                        <p className={isActive ? activeLink : unactiveLink} onClick={onLogoutClick}> Выход</p>
+                                    )}
+                                </NavLink>
+                            </nav>
 
-                <section className={Styles.rightSection}>
-                     <ul className= {Styles.List}>
-                        {orders.map(renderOrderElement)}
-                     </ul>
-                    <div className={Styles.inputBox}>
-                     <p>История заказов(тест)</p>   
-                    </div>
-                </section>
-            </form>
-        </RouterModal>
+                            <div className={Styles.paragraphBox + " mt-20"}>
+                                <p className={"text text_type_main-default text_color_inactive"}>В этом разделе вы можете </p>
+                                <p className={"text text_type_main-default text_color_inactive"}>изменить свои персональные данные </p>
+                            </div>
+                        </section>
+
+                        <section className={Styles.rightSection}>
+                            <ul style={{ gap: "24px" }} className={Styles.list}>
+                                {orders.map(renderOrderElement)}
+                            </ul>
+                        </section>
+
+                    </form>
+                </RouterModal>
+            }
+        </>
     );
 }
 
