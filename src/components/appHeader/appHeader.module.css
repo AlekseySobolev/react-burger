@@ -3,28 +3,40 @@
     background: #1C1C21;
     box-sizing: border-box;
 }
-.list{
+.nav{
     padding: 0;
     margin-right: 8px;
-    list-style-type:none;
     display:  flex;
 }
-.listElement{
+.navLink{
     display:  flex;
     align-items: center;
+    color: inherit;
+    text-decoration: none;
+    cursor:pointer;
 }
 .paragraph{
     margin-left: 8px;
-
 }
-/* .navigator{
-    margin: 0 auto;
-    width: calc(100% - 2 *320px);
-} */
 
 .logoElement{
     padding-left: 104px;
     padding-right: 289px;
     display:  flex;
     align-items: center;
+}
+
+.activelink{
+    text-decoration: none;
+    cursor:pointer;
+}
+.unactivelink{
+    text-decoration: none;
+    cursor:pointer;
+}
+.activelink:hover{
+    opacity: 0.6;
+}
+.unactivelink:hover{
+    opacity: 0.6;
 }

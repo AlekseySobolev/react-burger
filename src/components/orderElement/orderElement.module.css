@@ -1,0 +1,64 @@
+.listElement{
+   background-color:  #1C1C21;
+   border-radius: 40px;
+}
+.topInfoBox{
+    display: flex;
+    justify-content: space-between;
+}
+.middleInfoBox{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+}
+.bottomInfoBox{
+    display: flex;
+    justify-content: space-between;
+}
+.paragraph{
+    padding: 0;
+    margin: 0;
+    max-height: 30px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+}
+.img{
+    border: purple solid 2px;
+    border-radius: 50%;
+    min-width: 64px;
+    min-height: 64px;
+    background-color: black;
+    background-position: center;
+    position: absolute;
+}
+.hiddenImg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: purple solid 2px;
+    border-radius: 50%;
+    min-width: 64px;
+    min-height: 64px;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-position: center;
+    position: absolute;
+}
+
+.imageContainer{
+    display: flex;
+    position: relative;
+    min-height: 64px;
+}
+.orderContainer{
+    /* min-height: 198px; */
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.orderPriceContainer{
+    display: flex;
+    align-items: center;
+}
