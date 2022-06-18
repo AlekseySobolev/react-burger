@@ -21,7 +21,7 @@ function Ingredient({ ingredient, onIngredientClick }) {
         return (
 
                 <li style={{ opacity }} className={ingredientStyles.listElement} onClick={() => onIngredientClick(ingredient)}>
-                        <img className={"mb-1 mr-4 ml-4"} src={image} ref={dragRef}></img>
+                        <img className={"mb-1 mr-4 ml-4"} alt={"изображение ингредиента"} src={image} ref={dragRef}></img>
                         <div className={ingredientStyles.container + " mb-1"} >
                                 <p className={ingredientStyles.paragraph + " text text_type_digits-default"}>{price}</p>
                                 <CurrencyIcon type="primary" />

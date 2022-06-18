@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Styles from './feedPage.module.css';
 import RouterModal from '../../components/routerModal/RouterModal';
-import { Link, NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import OrderElement from '../../components/orderElement/OrderElement';
@@ -11,16 +11,13 @@ import { getOrderNumberColor } from '../../utils/functions';
 import { REMOVE_CLICKED_ORDER, SET_CLICKED_ORDER } from '../../services/actions/userOrderDescription';
 import Modal from '../../components/modal/Modal';
 import UserOrderDetails from '../../components/userOrderDetails/UserOrderDetails';
-import UserOrderDetailsPage from '../userOrderDetailsPage/UserOrderDetailsPage';
-
-
+import { v4 as uuidv4 } from 'uuid';
+import AppHeader from '../../components/appHeader/AppHeader';
 function FeedPage({ isRouter }) {
 
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-
-    // const background = location.state?.background;
 
     const { userOrderDescription } = useSelector(state => state.userOrderDescription);
     const { orders: wsOrders, wsConnected } = useSelector(state => state.feed);
@@ -56,13 +53,13 @@ function FeedPage({ isRouter }) {
 
     };
 
-    const renderOrderElement = (element, index) => {
+    const renderOrderElement = (element) => {
         return (
-            <React.Fragment key={index}>
-                <Link className={Styles.link} to={`/feed/${element.number}`} state={{ background: location }}>
-                    <OrderElement element={element} isOrderHistoryPage={false} onUserOrderClick={onUserOrderDetailsClick} />
-                </Link>
-            </React.Fragment>
+
+            <Link className={Styles.link} to={`/feed/${element.number}`} state={{ background: location }}>
+                <OrderElement element={element} isOrderHistoryPage={false} onUserOrderClick={onUserOrderDetailsClick} />
+            </Link>
+
         )
     };
 
@@ -77,15 +74,17 @@ function FeedPage({ isRouter }) {
             <>
                 {isOrderDoneDetailsOpened && userOrderDescription &&
                     <Modal title={`#${userOrderDescription.number}`} onClose={closeAllModals} isRouter={false}>
-                        <UserOrderDetails />
+                        <React.Fragment key={uuidv4()}>
+                            <UserOrderDetails />
+                        </React.Fragment>
                     </Modal>
                 }
 
                 {filteredOrders && ordersQty <= 10 &&
-                    <ul className={Styles.orderlist}>
+                    <ul key={uuidv4()} className={Styles.orderlist}>
                         {filteredOrders.map((filteredOrder, index) => {
                             return (
-                                <li key={index} className={Styles.orderListElement + " text text_type_digits-default"} style={{ color: `${orderNumberColor}` }}>
+                                <li key={uuidv4()} className={Styles.orderListElement + " text text_type_digits-default"} style={{ color: `${orderNumberColor}` }}>
                                     {filteredOrder.number}
                                 </li>
                             )
@@ -95,13 +94,12 @@ function FeedPage({ isRouter }) {
 
                 {filteredOrders && ordersQty >= 10 &&
                     <>
-                        <ul className={Styles.orderlist}>
+                        <ul key={uuidv4()} className={Styles.orderlist}>
                             {filteredOrders.map((filteredOrder, index) => {
-
                                 return (
                                     <>
                                         {index <= 10 &&
-                                            <li key={index} className={Styles.orderListElement + " text text_type_digits-default"} style={{ color: `${orderNumberColor}` }}>
+                                            <li key={uuidv4()} className={Styles.orderListElement + " text text_type_digits-default"} style={{ color: `${orderNumberColor}` }}>
                                                 {filteredOrder.number}
                                             </li>
                                         }
@@ -111,12 +109,12 @@ function FeedPage({ isRouter }) {
                             })}
                         </ul>
 
-                        <ul className={Styles.orderlist}>
+                        <ul key={uuidv4()} className={Styles.orderlist}>
                             {filteredOrders.map((filteredOrder, index) => {
                                 return (
                                     <>
                                         {index >= 10 &&
-                                            <li key={index} className={Styles.orderListElement + " text text_type_digits-default"} style={{ color: `${orderNumberColor}` }}>
+                                            <li key={uuidv4()} className={Styles.orderListElement + " text text_type_digits-default"} style={{ color: `${orderNumberColor}` }}>
                                                 {filteredOrder.number}
                                             </li>
                                         }
@@ -136,7 +134,8 @@ function FeedPage({ isRouter }) {
         <>
             {!orders && !wsConnected && 'Загрузка...'}
             {orders && wsConnected &&
-                <RouterModal title={""} isRouter={isRouter} isProfilePage={true}>
+                <>
+                    <AppHeader />
                     <form className={Styles.form + " mt-10 ml-5"}>
 
                         <h1 className={Styles.h1 + " text text_type_main-large mb-5"}>Лента заказов</h1>
@@ -175,12 +174,10 @@ function FeedPage({ isRouter }) {
                                         <p className={Styles.totalCount + " text text_type_digits-large"}>{totalToday}</p>
                                     </div>
                                 </div>
-
                             </section>
-
                         </div>
                     </form>
-                </RouterModal>
+                </>
             }
         </>
     );

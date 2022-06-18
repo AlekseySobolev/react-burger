@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
 import Styles from './userOrderDetails.module.css';
-import RouterModal from '../routerModal/RouterModal';
-import { Input, Button, CurrencyIcon, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { NavLink, useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getOrderLocaleStatus, getOrderNumberColor, normalizeOrderDate } from '../../utils/functions';
-
+import { v4 as uuidv4 } from 'uuid';
 const prices = [];
 
 function UserOrderDetails() {
@@ -31,7 +28,7 @@ function UserOrderDetails() {
             <>
                 {burgerIngredient &&
 
-                    <li key={index} className={Styles.listElement + " mr-6"}>
+                    <li key={uuidv4()} className={Styles.listElement + " mr-6"}>
                         <div style={{ backgroundImage: `url(${burgerIngredient.image_mobile})` }} className={Styles.img + " mr-2"}></div>
                         <div className={Styles.imgInfo}>
                             <p>{burgerIngredient.name}</p>

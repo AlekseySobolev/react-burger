@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Styles from './orderHistoryPage.module.css';
 import RouterModal from '../../components/routerModal/RouterModal';
-import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getEditUserRequest, getLogoutRequest } from '../../services/actions/auth';
+import { getLogoutRequest } from '../../services/actions/auth';
 import PropTypes from 'prop-types';
-import { ordersData, ordersUrl } from '../../utils/constants';
+import { ordersUrl } from '../../utils/constants';
 import OrderElement from '../../components/orderElement/OrderElement';
 import { wsCloseConnection, wsStartConnection } from '../../services/actions/wsActions';
 import { getCookie } from '../../utils/functions';
 import { REMOVE_CLICKED_ORDER, SET_CLICKED_ORDER } from '../../services/actions/userOrderDescription';
 import UserOrderDetails from '../../components/userOrderDetails/UserOrderDetails';
 import Modal from '../../components/modal/Modal';
+import AppHeader from '../../components/appHeader/AppHeader';
 
 function OrderHistoryPage({ isRouter }) {
 
@@ -65,7 +65,7 @@ function OrderHistoryPage({ isRouter }) {
         return (
             <React.Fragment key={index}>
                 <Link className={Styles.link} to={`/profile/orders/${element.number}`} state={{ background: location }}>
-                    <OrderElement element={element} isOrderHistoryPage={true} onUserOrderClick={onUserOrderDetailsClick}/>
+                    <OrderElement element={element} isOrderHistoryPage={true} onUserOrderClick={onUserOrderDetailsClick} />
                 </Link>
             </React.Fragment>
         )
@@ -83,7 +83,8 @@ function OrderHistoryPage({ isRouter }) {
 
             {!orders && !wsConnected && 'Загрузка...'}
             {orders && wsConnected &&
-                <RouterModal title={""} isRouter={isRouter} isProfilePage={true}>
+                <>
+                    <AppHeader/>
                     <form className={Styles.form + " mt-10"}>
                         <section className={Styles.leftSection + " mt-20 ml-5 mr-15"}>
                             <nav className={Styles.nav}>
@@ -115,9 +116,8 @@ function OrderHistoryPage({ isRouter }) {
                                 {orders.map(renderOrderElement)}
                             </ul>
                         </section>
-
                     </form>
-                </RouterModal>
+                </>
             }
         </>
     );

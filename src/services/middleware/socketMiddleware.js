@@ -1,5 +1,3 @@
-import { Socket } from "dgram";
-
 export const socketMiddleware = (wsActions) => {
 
     return store => {

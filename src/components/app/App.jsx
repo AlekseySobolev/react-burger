@@ -22,13 +22,10 @@ import { useNavigate } from 'react-router-dom';
 import { getRefreshTokenRequest, getUserRequest } from '../../services/actions/auth';
 import OrderHistoryPage from '../../pages/orderHistoryPage/OrderHistoryPage';
 import FeedPage from '../../pages/feedPage/FeedPage';
-import OrderDoneDetails from '../userOrderDetails/UserOrderDetails';
-import { REMOVE_CLICKED_ORDER, SET_CLICKED_ORDER } from '../../services/actions/userOrderDescription';
-import UserOrderDetails from '../userOrderDetails/UserOrderDetails';
 import UserOrderDetailsPage from '../../pages/userOrderDetailsPage/UserOrderDetailsPage';
 
 function App() {
-
+  console.log("рендер App");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -37,12 +34,11 @@ function App() {
   const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(state => state.burgerIngredients);
   const { orderDescriptionFailed } = useSelector(state => state.orderDescription);
   const { ingredientDescription } = useSelector(state => state.ingredientDescription);
-  // const clickedOrder = useSelector(state => state.clickedOrder);
+
   const { isAuth, userRequest } = useSelector(state => state.auth);
 
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false);
   const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = useState(false);
-  // const [isOrderDoneDetailsOpened, setIsOrderDoneDetailsOpened] = useState(false);
 
   const checkAuth = () => {
 
@@ -62,7 +58,7 @@ function App() {
       dispatch(getIngredients());
       checkAuth();
     },
-    []
+    [dispatch]
   );
 
   const closeAllModals = () => {

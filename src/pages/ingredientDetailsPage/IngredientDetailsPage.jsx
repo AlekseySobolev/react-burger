@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import PropTypes from 'prop-types';
+import AppHeader from '../../components/appHeader/AppHeader';
 
 function IngredientDetailsPage({ isRouter }) {
     
@@ -17,8 +18,10 @@ function IngredientDetailsPage({ isRouter }) {
     return (
         <>
         {ingredientDescription &&
-            <RouterModal title={"Детали ингредиента"} isRouter={isRouter}>
-            <div className={ingredientDetailsStyles.ingredientDataBox}>
+            <>
+            <AppHeader/>
+            <main className={ingredientDetailsStyles.ingredientDataBox}>
+                 <h1 className={ingredientDetailsStyles.h2 + " text text_type_main-medium"}>{"Детали ингридиента"}</h1>
                 <img className={"mb-4 pl-5 pr-5"} src={ingredientDescription.image_large} alt="Изображение ингредиента" />
                 <h2 className={ingredientDetailsStyles.h2 + " text text_type_main-medium"}>{ingredientDescription.name}</h2>
                 <div className= {ingredientDetailsStyles.caloriesBox + " mt-8"}>
@@ -39,8 +42,8 @@ function IngredientDetailsPage({ isRouter }) {
                         <p className={"text text_type_main-default text_color_inactive"}>{ingredientDescription.carbohydrates}</p>
                     </div>
                 </div>
-            </div>
-            </RouterModal>
+            </main>
+            </>
         }
         </>
     )

@@ -6,6 +6,7 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getForgotPasswordRequest } from '../../services/actions/auth';
 import PropTypes from 'prop-types';
+import AppHeader from '../../components/appHeader/AppHeader';
 
 function ForgotPasswordPage({ isRouter }) {
 
@@ -15,7 +16,7 @@ function ForgotPasswordPage({ isRouter }) {
 
     const currentPath = location?.state?.from?.pathname;
 
-    const [form, setValue] = useState({ email: ''});
+    const [form, setValue] = useState({ email: '' });
 
     const { isAnon } = useSelector(state => state.auth);
 
@@ -29,21 +30,23 @@ function ForgotPasswordPage({ isRouter }) {
             dispatch(getForgotPasswordRequest(form, () => navigate("/reset-password")));
         }
     }
-    if(!isAnon){
-        return <Navigate to = {currentPath ? currentPath : "/"}/>
+    if (!isAnon) {
+        return <Navigate to={currentPath ? currentPath : "/"} />
     }
     return (
-        <RouterModal title={"Восстановление пароля"} isRouter={isRouter}>
-            <form className={Styles.form} onSubmit={onSubmit}>
-                <div className={Styles.inputBox + ' ' + "mt-6 mb-6"}>
-                    <div className={Styles.inputWrapper}>
-                        <Input name={"email"} type={"email"} placeholder={"Укажите e-mail"} onChange={onChange} />
-                    </div>
+        <>
+        <AppHeader/>
+        <form className={Styles.form} onSubmit={onSubmit}>
+            <h1 className={"text text_type_main-medium"}>{"Восстановление пароля"}</h1>
+            <div className={`${Styles.inputBox} mt-6 mb-6`}>
+                <div className={Styles.inputWrapper}>
+                    <Input name={"email"} type={"email"} value={form.email} placeholder={"Укажите e-mail"} onChange={onChange} />
                 </div>
-                <Button type="primary" size="large">Восстановить</Button>
-                <p className={"mt-20 text text_type_main-default text_color_inactive"}>Вспомнили пароль? <Link className={Styles.span} to="/login"> Войти </Link></p>
-            </form>
-        </RouterModal>
+            </div>
+            <Button type="primary" size="large">Восстановить</Button>
+            <p className={"mt-20 text text_type_main-default text_color_inactive"}>Вспомнили пароль? <Link className={Styles.span} to="/login"> Войти </Link></p>
+        </form>
+        </>
     );
 }
 

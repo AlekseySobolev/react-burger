@@ -144,7 +144,6 @@ export function getRegisterRequest({name, email, password}, redirect) {
             user: res.user,
             password: password
           });
-          console.log(res.message);
         } else {
           deleteCookie("accessToken");
           dispatch({
@@ -195,7 +194,6 @@ export function getRegisterRequest({name, email, password}, redirect) {
           });
         }
       }).catch(err =>{
-        console.log(err);
         dispatch({
           type: SEND_LOGIN_ERROR
         });
@@ -226,7 +224,6 @@ export function getRegisterRequest({name, email, password}, redirect) {
           dispatch({
             type: SEND_FORGOT_PASSWORD_SUCCESS
           });
-          console.log(res.message);
           if(redirect)redirect();
         } else {
           dispatch({
@@ -265,7 +262,6 @@ export function getRegisterRequest({name, email, password}, redirect) {
           dispatch({
             type: SEND_RESET_PASSWORD_SUCCESS
           });
-          console.log(res.message);
           if(redirect)redirect();
         } else {
           dispatch({
@@ -342,7 +338,6 @@ export function getRegisterRequest({name, email, password}, redirect) {
           dispatch({
             type: SEND_LOGOUT_SUCCESS
           });
-          console.log(res.message);
         } else {
           dispatch({
             type: SEND_LOGOUT_ERROR
@@ -363,7 +358,6 @@ export function getRegisterRequest({name, email, password}, redirect) {
       dispatch({
         type: SEND_USER_ORDER_REQUEST
       });
-     console.log(`${userOrderUrl}/${number}`); 
      fetch(`${userOrderUrl}/${number}`, {
         method: 'GET',
         headers: {
@@ -377,14 +371,12 @@ export function getRegisterRequest({name, email, password}, redirect) {
             type: SEND_USER_ORDER_SUCCESS,
             userOrderInfo: res.orders
           });
-          console.log(res.orders.ingredients);
         } else {
           dispatch({
             type: SEND_USER_ORDER_ERROR
           });
         }
       }).catch(err =>{
-        console.log(err);
         dispatch({
           type: SEND_USER_ORDER_ERROR
         });

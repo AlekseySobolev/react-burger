@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    margin-top: 180px;
 }
 
 .inputWrapper,
@@ -15,7 +15,7 @@
     flex-direction: column;
     align-items: center;
     gap: 24px;
-    width: 100%;
+    min-width: 480px; 
 }
 
 .paragraphBox{

@@ -6,36 +6,38 @@ import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getEditUserRequest, getLogoutRequest, getUserRequest } from '../../services/actions/auth';
 import PropTypes from 'prop-types';
+import AppHeader from '../../components/appHeader/AppHeader';
 
 function ProfilePage({ isRouter }) {
 
-    const { user, password} = useSelector(state => state.auth);
+    const { user, password } = useSelector(state => state.auth);
 
     const dispath = useDispatch();
 
     const unactiveLink = Styles.activeLink + " text text_type_main-medium text_color_inactive";
     const activeLink = Styles.unactiveLink + " text text_type_main-medium";
-    const [form, setValue] = useState({ name: user.name, email: user.email, password: password});
+    const [form, setValue] = useState({ name: user.name, email: user.email, password: password });
     const [isOpen, setIsOpen] = useState(false);
-    
-    const onChange = e =>{
-        setValue({...form, [e.target.name]: e.target.value});
+
+    const onChange = e => {
+        setValue({ ...form, [e.target.name]: e.target.value });
         setIsOpen(true);
     }
 
-    const onLogoutClick = () =>{
+    const onLogoutClick = () => {
         dispath(getLogoutRequest(localStorage.getItem('refreshToken')));
     }
-    const onCancelClick = () =>{
+    const onCancelClick = () => {
         setIsOpen(false);
         dispath(getUserRequest(form));
     }
 
-    const onSubmit = () =>{
-        dispath(getEditUserRequest(form));   
+    const onSubmit = () => {
+        dispath(getEditUserRequest(form));
     }
     return (
-        <RouterModal title={""} isRouter={isRouter} isProfilePage={true}>
+        <>
+            <AppHeader/>
             <form className={Styles.form + " mt-30"} onSubmit={onSubmit}>
                 <section className={Styles.leftSection + " ml-5 mr-15"}>
 
@@ -69,16 +71,16 @@ function ProfilePage({ isRouter }) {
 
                     <div className={Styles.inputBox}>
                         <div className={Styles.inputWrapper}>
-                            <Input name={"name"} type={"text"} placeholder={"Имя"} icon={"EditIcon"} value={form.name}  onChange={onChange}/>
+                            <Input name={"name"} type={"text"} placeholder={"Имя"} icon={"EditIcon"} value={form.name} onChange={onChange} />
                         </div>
                         <div className={Styles.inputWrapper}>
-                            <Input name={"email"} type={"email"} placeholder={"Логин"} icon={"EditIcon"} value={form.email}  onChange={onChange}/>
+                            <Input name={"email"} type={"email"} placeholder={"Логин"} icon={"EditIcon"} value={form.email} onChange={onChange} />
                         </div>
                         <div className={Styles.inputWrapper}>
-                            <Input name={"password"} type={"password"} placeholder={"Пароль"} icon={"CloseIcon"}  value={form.password} onChange={onChange}/>
+                            <Input name={"password"} type={"password"} placeholder={"Пароль"} icon={"CloseIcon"} value={form.password} onChange={onChange} />
                         </div>
 
-                        <div className={isOpen ? Styles.buttonBox_opened: Styles.buttonBox } >
+                        <div className={isOpen ? Styles.buttonBox_opened : Styles.buttonBox} >
                             <p className={Styles.link + " mr-7 text text_type_main-default text_color_inactive"} onClick={onCancelClick}>Отмена</p>
                             <Button type="primary" size="large" >Сохранить</Button>
                         </div>
@@ -86,7 +88,7 @@ function ProfilePage({ isRouter }) {
                     </div>
                 </section>
             </form>
-        </RouterModal>
+        </>
     );
 }
 
