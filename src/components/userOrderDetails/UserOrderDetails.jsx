@@ -1,14 +1,16 @@
 import Styles from './userOrderDetails.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { getOrderLocaleStatus, getOrderNumberColor, normalizeOrderDate } from '../../utils/functions';
 import { v4 as uuidv4 } from 'uuid';
+import { useLocation } from 'react-router-dom';
 const prices = [];
 
 function UserOrderDetails() {
 
-    const { userOrderDescription } = useSelector(state => state.userOrderDescription);
+    const location = useLocation();
+    const userOrderDescription  = location.state?.currentOrder;
+
     const orderIngredients = userOrderDescription.ingredients;
     const unicOrderIngredients = [...new Set(orderIngredients)];
 
@@ -77,8 +79,5 @@ function UserOrderDetails() {
     );
 }
 
-UserOrderDetails.propTypes = {
-    isRouter: PropTypes.bool.isRequired
-}
 
 export default UserOrderDetails;

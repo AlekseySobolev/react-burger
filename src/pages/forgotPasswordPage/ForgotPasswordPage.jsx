@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Styles from './forgotPasswordPage.module.css';
-import RouterModal from '../../components/routerModal/RouterModal';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getForgotPasswordRequest } from '../../services/actions/auth';
-import PropTypes from 'prop-types';
-import AppHeader from '../../components/appHeader/AppHeader';
 
-function ForgotPasswordPage({ isRouter }) {
+function ForgotPasswordPage() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -35,7 +32,6 @@ function ForgotPasswordPage({ isRouter }) {
     }
     return (
         <>
-        <AppHeader/>
         <form className={Styles.form} onSubmit={onSubmit}>
             <h1 className={"text text_type_main-medium"}>{"Восстановление пароля"}</h1>
             <div className={`${Styles.inputBox} mt-6 mb-6`}>
@@ -48,10 +44,6 @@ function ForgotPasswordPage({ isRouter }) {
         </form>
         </>
     );
-}
-
-ForgotPasswordPage.propTypes = {
-    isRouter: PropTypes.bool.isRequired
 }
 
 export default ForgotPasswordPage;

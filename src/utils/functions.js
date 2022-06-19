@@ -1,5 +1,6 @@
 import { format, formatDistanceToNowStrict, isToday, isYesterday } from "date-fns";
 import ru from "date-fns/locale/ru";
+
 import { orderColors, orderLocaleStatus } from "./constants";
 
 export const getOrderLocaleStatus = (status) => {

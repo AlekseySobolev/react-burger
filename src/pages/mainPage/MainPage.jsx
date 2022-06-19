@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import AppHeader from '../../components/appHeader/AppHeader.jsx';
 import BurgerIngredients from '../../components/burgerIngredients/BurgerIngredients.jsx';
 import BurgerConstructor from '../../components/burgerConstructor/BurgerConstructor.jsx';
 import { DndProvider } from 'react-dnd';
@@ -10,7 +9,6 @@ function MainPage({onIngredientClick, onOrderButtonClick }) {
 
     return (
         <>
-            <AppHeader />
             <main className={Styles.main}>
                 <DndProvider backend={HTML5Backend}>
                     <BurgerIngredients onIngredientClick={onIngredientClick} />

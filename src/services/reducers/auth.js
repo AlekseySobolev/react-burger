@@ -9,7 +9,7 @@ SEND_REFRESH_TOKEN_REQUEST, SEND_REFRESH_TOKEN_SUCCESS, SEND_REFRESH_TOKEN_ERROR
 
 const userInitialState = {
     user: null,
-    password: null,
+    password: "",
     throughForgotPassword: false,
     accessToken: null,
     refreshToken: null,
@@ -80,7 +80,7 @@ export const authReducer = (state = userInitialState, action) =>{
           };
         }
         case SEND_LOGOUT_SUCCESS: {
-          return { ...state, userFailed: false, user: null, password: null, isAuth: false, accessToken: null, refreshToken: null, userRequest: false, isAnon: true };
+          return { ...state, userFailed: false, user: null, password: "", isAuth: false, accessToken: null, refreshToken: null, userRequest: false, isAnon: true };
         }
         case SEND_LOGOUT_ERROR: {
           return { ...state, userFailed: true, userRequest: false };

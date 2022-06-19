@@ -1,14 +1,16 @@
 import orderDetailsStyles from './orderDetails.module.css';
 import done from '../../images/done.png';
-import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+
 function OrderDetails() {
 
-    const { orderDescription } = useSelector(state => state.orderDescription);
+    const location = useLocation();
+    const orderDescription  = location.state?.currentOrder;
     const orderNumber = orderDescription?.order?.number;
 
     return ( 
             <div className={orderDetailsStyles.infoBox + " mt-9"}>
-                <h1 className={"text text_type_digits-large mb-8"}>{orderNumber}</h1>
+                <h1 className={"text text_type_digits-large mb-8"}>{orderNumber ? orderNumber : "загрузка..."}</h1>
                 <h2 className={"text text_type_main-medium mb-15"}>идентификатор заказа</h2>
                 <img className={"mb-15"} src={done} alt="изображение галки" />
                 <p className={"text text_type_main-default mb-2"}>Ваш заказ начали готовить</p>

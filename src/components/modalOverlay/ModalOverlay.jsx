@@ -1,17 +1,14 @@
 import PropTypes from 'prop-types';
 import Styles from './modalOverlay.module.css';
 
-function ModalOverlay({onClose, isRouter}){
-
-  const modalOverlay = isRouter ? Styles.routerModalOverlay: Styles.modalOverlay;
+function ModalOverlay({onClose}){
         return (
-          <div className={modalOverlay} onClick = {() => onClose()}/>
+          <div className={Styles.modalOverlay} onClick = {() => onClose()}/>
         );
 }
 
 ModalOverlay.propTypes = {
-  onClose: PropTypes.func,
-  isRouter: PropTypes.bool.isRequired
+  onClose: PropTypes.func
 }
 
 export default ModalOverlay;

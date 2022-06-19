@@ -24,7 +24,7 @@ function BurgerIngredients({ onIngredientClick }) {
         return (
             <React.Fragment key={ingredient._id}>
                 {ingredient &&
-                      <Link className={burgerIngredientsStyles.link} to={`/ingredients/${ingredient._id}`} state={{ background: location }}>
+                      <Link className={burgerIngredientsStyles.link} to={`/ingredients/${ingredient._id}`} state={{ background: location, currentIngredient: ingredient}}>
                         <Ingredient ingredient={ingredient} onIngredientClick={onIngredientClick} />
                       </Link>
                 }

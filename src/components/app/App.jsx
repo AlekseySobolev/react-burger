@@ -23,9 +23,11 @@ import { getRefreshTokenRequest, getUserRequest } from '../../services/actions/a
 import OrderHistoryPage from '../../pages/orderHistoryPage/OrderHistoryPage';
 import FeedPage from '../../pages/feedPage/FeedPage';
 import UserOrderDetailsPage from '../../pages/userOrderDetailsPage/UserOrderDetailsPage';
+import AppHeader from '../appHeader/AppHeader';
+import UserOrderDetails from '../userOrderDetails/UserOrderDetails';
 
 function App() {
-  console.log("рендер App");
+  console.log("Рeндер App");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -38,7 +40,6 @@ function App() {
   const { isAuth, userRequest } = useSelector(state => state.auth);
 
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false);
-  const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = useState(false);
 
   const checkAuth = () => {
 
@@ -62,25 +63,20 @@ function App() {
   );
 
   const closeAllModals = () => {
-
     setIsOrderDetailsOpened(false);
-    setIsIngredientDetailsOpened(false);
 
-    if (ingredientDescription) {
-      if (ingredientDescription) {
-        dispatch({ type: REMOVE_INGREDIENT_DESCRIPTION });
-        navigate(-1);
-      }
+    // if (ingredientDescription) {
+    //   navigate(-1);
+    //     dispatch({ type: REMOVE_INGREDIENT_DESCRIPTION }); 
+    //   }
+    navigate(-1);
 
-
-    }
   }
 
   const onIngredientDetailsClick = (clickedIngredient) => {
 
     if (clickedIngredient) {
       dispatch({ type: SET_INGREDIENT_DESCRIPTION, ingredientDescription: clickedIngredient });
-      setIsIngredientDetailsOpened(true);
     }
   };
 
@@ -102,18 +98,33 @@ function App() {
 
   return (
     <>
-      {isIngredientDetailsOpened &&
-        background && <Routes>
-          <Route path="/ingredients/:id" element={
-            <Modal title={"Детали ингредиента"} onClose={closeAllModals} isRouter={false}>
-              <IngredientDetails />
+      {background &&
+        <>
+
+          <Routes>
+            <Route path="/ingredients/:id" element={
+              <Modal title={"Детали ингредиента"} onClose={closeAllModals}>
+                <IngredientDetails />
+              </Modal>
+            } />
+          </Routes>
+        </>
+      }
+
+      {/* {background &&
+      <>
+        <Routes>
+          <Route path="/feed/:id" element={
+            <Modal title={"Тест"} onClose={closeAllModals}>
+              <UserOrderDetails />
             </Modal>
           } />
         </Routes>
-      }
+        </>
+      } */}
 
       {isOrderDetailsOpened &&
-        <Modal title={""} onClose={closeAllModals} isRouter={false}>
+        <Modal title={""} onClose={closeAllModals}>
           <OrderDetails />
         </Modal>
       }
@@ -124,31 +135,33 @@ function App() {
         {ingredientsFailed && 'Произошла ошибка'}
         {ingredients.length !== 0 &&
           <>
+            <AppHeader />
+
             <Routes location={background || location}>
 
-              <Route path="/login" element={<LoginPage isRouter={true} />} />
-              <Route path="/register" element={<RegistrationPage isRouter={true} />} />
-              <Route path="/forgot-password" element={<ForgotPasswordPage isRouter={true} />} />
-              <Route path="/reset-password" element={<ResetPasswordPage isRouter={true} />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegistrationPage />} />
+              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+              <Route path="/reset-password" element={<ResetPasswordPage />} />
               <Route path="/" element={<MainPage onIngredientClick={onIngredientDetailsClick} onOrderButtonClick={onOrderDetailsClick} />} />
-              <Route path="/ingredients/:id" element={<IngredientDetailsPage isRouter={true} />} />
-              <Route path="/feed" element={<FeedPage isRouter={true} />} />
-              <Route path="/feed/:id" element={<UserOrderDetailsPage isRouter={true} />} />
+              <Route path="/ingredients/:id" element={<IngredientDetailsPage />} />
+              <Route path="/feed/:id" element={<UserOrderDetailsPage />} />
+              <Route path="/feed" element={<FeedPage />} />
 
               <Route path="/profile/orders/:id" element={
                 <ProtectedRoute>
-                  <UserOrderDetailsPage isRouter={true} />
+                  <UserOrderDetailsPage />
                 </ProtectedRoute>
               } />
 
               <Route path="/profile" element={
                 <ProtectedRoute>
-                  <ProfilePage isRouter={true} />
+                  <ProfilePage />
                 </ProtectedRoute>
               } />
               <Route path="/profile/orders" element={
                 <ProtectedRoute>
-                  <OrderHistoryPage isRouter={true} />
+                  <OrderHistoryPage />
                 </ProtectedRoute>
               } />
 

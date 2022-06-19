@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Styles from './profilePage.module.css';
-import RouterModal from '../../components/routerModal/RouterModal';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getEditUserRequest, getLogoutRequest, getUserRequest } from '../../services/actions/auth';
-import PropTypes from 'prop-types';
-import AppHeader from '../../components/appHeader/AppHeader';
 
-function ProfilePage({ isRouter }) {
+function ProfilePage() {
 
     const { user, password } = useSelector(state => state.auth);
 
@@ -37,7 +34,6 @@ function ProfilePage({ isRouter }) {
     }
     return (
         <>
-            <AppHeader/>
             <form className={Styles.form + " mt-30"} onSubmit={onSubmit}>
                 <section className={Styles.leftSection + " ml-5 mr-15"}>
 
@@ -90,10 +86,6 @@ function ProfilePage({ isRouter }) {
             </form>
         </>
     );
-}
-
-ProfilePage.propTypes = {
-    isRouter: PropTypes.bool.isRequired
 }
 
 export default ProfilePage;

@@ -1,21 +1,19 @@
 import { useEffect } from 'react';
 import Styles from './userOrderDetailsPage.module.css';
-import RouterModal from '../../components/routerModal/RouterModal';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserOrder } from '../../services/actions/auth';
-import PropTypes from 'prop-types';
 import { getOrderLocaleStatus, getOrderNumberColor, normalizeOrderDate } from '../../utils/functions';
 import { v4 as uuidv4 } from 'uuid';
-import AppHeader from '../../components/appHeader/AppHeader';
 
 const prices=[];
 
-function UserOrderDetailsPage({ isRouter }) {
-     console.log("рендер UserOrderDetailsPage");
-    const dispatch = useDispatch();
+function UserOrderDetailsPage() {
 
+    const dispatch = useDispatch();
+    const location = useLocation();
+    
     const { id: orderNumber } = useParams();
      const { userOrderInfo } = useSelector(state => state.feed);
    
@@ -73,7 +71,6 @@ function UserOrderDetailsPage({ isRouter }) {
         <>
             {userOrderInfo &&
             <>
-                <AppHeader/>
                 <main className={Styles.main + " mt-30"}>
                 <h1 className={Styles.h1 + " text text_type_main-medium"}>{`#${orderNumber}`}</h1>
                     <div className={Styles.orderInfoBox + " mt-5"}>
@@ -126,10 +123,6 @@ function UserOrderDetailsPage({ isRouter }) {
             } 
         </>
     );
-}
-
-UserOrderDetailsPage.propTypes = {
-    isRouter: PropTypes.bool.isRequired
 }
 
 export default UserOrderDetailsPage;

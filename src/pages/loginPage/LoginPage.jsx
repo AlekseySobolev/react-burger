@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Styles from './loginPage.module.css';
-import RouterModal from '../../components/routerModal/RouterModal';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, Navigate, useLocation, useNavigate} from 'react-router-dom';
 import { getLoginRequest } from '../../services/actions/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import AppHeader from '../../components/appHeader/AppHeader';
 
-function LoginPage({ isRouter }) {
+function LoginPage() {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -34,7 +31,6 @@ function LoginPage({ isRouter }) {
 
     return (
             <>
-            <AppHeader/>
             <form className={Styles.form} onSubmit={onSubmit}>
                  <h1 className={"text text_type_main-medium"}>{"Вход"}</h1>
                 <div className={`${Styles.inputBox} mt-6 mb-6`}>
@@ -55,10 +51,6 @@ function LoginPage({ isRouter }) {
             </>
      
     );
-}
-
-LoginPage.propTypes = {
-    isRouter: PropTypes.bool.isRequired
 }
 
 export default LoginPage;

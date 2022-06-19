@@ -1,13 +1,11 @@
 import ingredientDetailsStyles from './ingredientDetailsPage.module.css';
-import RouterModal from '../../components/routerModal/RouterModal';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
-import PropTypes from 'prop-types';
-import AppHeader from '../../components/appHeader/AppHeader';
 
-function IngredientDetailsPage({ isRouter }) {
-    
+function IngredientDetailsPage() {
+    console.log("Рендер IngredientDetails PAGE");
+
     const {id : ingredientId } = useParams();
     const { ingredients } = useSelector(state=>state.burgerIngredients);
 
@@ -19,7 +17,6 @@ function IngredientDetailsPage({ isRouter }) {
         <>
         {ingredientDescription &&
             <>
-            <AppHeader/>
             <main className={ingredientDetailsStyles.ingredientDataBox}>
                  <h1 className={ingredientDetailsStyles.h2 + " text text_type_main-medium"}>{"Детали ингридиента"}</h1>
                 <img className={"mb-4 pl-5 pr-5"} src={ingredientDescription.image_large} alt="Изображение ингредиента" />
@@ -47,10 +44,6 @@ function IngredientDetailsPage({ isRouter }) {
         }
         </>
     )
-}
-
-IngredientDetailsPage.propTypes = {
-    isRouter: PropTypes.bool.isRequired
 }
 
 export default IngredientDetailsPage

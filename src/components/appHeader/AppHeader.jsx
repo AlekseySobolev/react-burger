@@ -17,7 +17,7 @@ function AppHeader() {
                     {({ isActive }) => (
                         <>
                             <BurgerIcon type={isActive ? "primary" : "secondary"} />
-                            <p className={appHeaderStyles.paragraph }><span className={isActive ? activeLink : unactiveLink}>Конструктор</span></p>
+                            <p className={appHeaderStyles.paragraph}><span className={isActive ? activeLink : unactiveLink}>Конструктор</span></p>
                         </>
                     )}
                 </NavLink>
@@ -25,20 +25,22 @@ function AppHeader() {
                     {({ isActive }) => (
                         <>
                             <ListIcon type={isActive ? "primary" : "secondary"} />
-                            <p className={appHeaderStyles.paragraph }><span className={isActive ? activeLink : unactiveLink}>Лента&nbsp;заказов</span></p>
+                            <p className={appHeaderStyles.paragraph}><span className={isActive ? activeLink : unactiveLink}>Лента&nbsp;заказов</span></p>
                         </>
                     )}
                 </NavLink>
-
-                <div className={appHeaderStyles.logoElement + " pb-4 pt-4"}>
-                    <Logo />
-                </div>
+                
+                <NavLink className={appHeaderStyles.navLink} to="/">
+                    <div className={appHeaderStyles.logoElement + " pb-4 pt-4 "}>
+                        <Logo />
+                    </div>
+                </NavLink>
 
                 <NavLink className={appHeaderStyles.navLink + " pl-5 pr-5 pb-4 pt-4 mr-2"} to="/profile">
                     {({ isActive }) => (
                         <>
                             <ProfileIcon type={isActive ? "primary" : "secondary"} />
-                            <p className={appHeaderStyles.paragraph }><span className={isActive ? activeLink : unactiveLink}>Личный&nbsp;кабинет</span></p>
+                            <p className={appHeaderStyles.paragraph}><span className={isActive ? activeLink : unactiveLink}>Личный&nbsp;кабинет</span></p>
                         </>
                     )}
                 </NavLink>

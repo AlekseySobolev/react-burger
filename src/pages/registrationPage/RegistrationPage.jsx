@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import Styles from './registrationPage.module.css';
-import RouterModal from '../../components/routerModal/RouterModal';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getRegisterRequest } from '../../services/actions/auth';
-import PropTypes from 'prop-types';
-import AppHeader from '../../components/appHeader/AppHeader';
 
-function RegistrationPage({ isRouter }) {
+function RegistrationPage() {
 
     const navigate = useNavigate();
 
@@ -28,7 +25,6 @@ function RegistrationPage({ isRouter }) {
 
     return (
         <>
-        <AppHeader/>
             <form className={Styles.form} onSubmit={onSubmit}>
             <h1 className={"text text_type_main-medium"}>{"Регистрация"}</h1>
                 <div className={`${Styles.inputBox} mt-6 mb-6`}>
@@ -47,10 +43,6 @@ function RegistrationPage({ isRouter }) {
             </form> 
         </>
     );
-}
-
-RegistrationPage.propTypes = {
-    isRouter: PropTypes.bool.isRequired
 }
 
 export default RegistrationPage;

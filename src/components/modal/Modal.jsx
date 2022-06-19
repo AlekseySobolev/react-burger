@@ -7,7 +7,7 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const modalsContainer = document.querySelector('#modals');
 
-function Modal({ title, onClose, isRouter, children }) {
+function Modal({ title, onClose, children }) {
 
     const handleEscKeydown = useCallback(
         (event) => {
@@ -34,7 +34,7 @@ function Modal({ title, onClose, isRouter, children }) {
                     {children}
                 </div>
             </div>
-            <ModalOverlay onClose={onClose} isRouter={isRouter}/>
+            <ModalOverlay onClose={onClose}/>
         </>,
         modalsContainer
     );
@@ -43,7 +43,6 @@ function Modal({ title, onClose, isRouter, children }) {
 Modal.propTypes = {
     title: PropTypes.string.isRequired,
     onClose: PropTypes.func.isRequired,
-    isRouter: PropTypes.bool.isRequired,
     children: PropTypes.element.isRequired
 }
 

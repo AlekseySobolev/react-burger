@@ -21,23 +21,6 @@ function OrderElement({ element, isOrderHistoryPage, onUserOrderClick }) {
     const lastzIndex = ingredientsQty - 5;
     const lastImg = burgerIngredients[burgerIngredients.length - 1].image_mobile;
 
-    const renderIngredientsImage = (ingredientId, burgerIngredients, orderIngredientQty, index) => {
-
-        const burgerIngredient = burgerIngredients.find(ingredient => ingredient._id === ingredientId);
-        prices.push(burgerIngredient.type === "bun" ? burgerIngredient.price * 2 : burgerIngredient.price);
-        const offset = `${50 * index}px`;
-        const zIndex = orderIngredientQty - index;
-        let maxImgQty = index < 5;
-
-        return (
-            <>
-                {burgerIngredient && maxImgQty &&
-                    <li key={uuidv4()} style={{ backgroundImage: `url(${burgerIngredient.image_mobile})`, left: offset, zIndex: zIndex }} className={Styles.imgList}></li>
-                }
-            </>
-        )
-    }
-
     const fullPrice = prices.reduce((currentSum, currentNumber) => {
         return currentSum + currentNumber
     }, 0);
@@ -46,29 +29,46 @@ function OrderElement({ element, isOrderHistoryPage, onUserOrderClick }) {
     return (
 
         <li key={uuidv4()} className={Styles.listElement + " pt-6 pb-6 pl-6 pr-6 mr-2"} onClick={() => onUserOrderClick(element)}>
-            <div key={uuidv4()} className={Styles.orderContainer}>
-                <div key={uuidv4()} className={Styles.topInfoBox}>
+            <div className={Styles.orderContainer}>
+                <div className={Styles.topInfoBox}>
                     <p className={"text text_type_main-default"}>{`#${number}`}</p>
                     <p className={"text text_type_main-default text_color_inactive"}>{normalizeOrderDate(createdAt)}</p>
                 </div>
 
-                <div key={uuidv4()} className={Styles.middleInfoBox}>
+                <div className={Styles.middleInfoBox}>
                     <p className={Styles.paragraph + " text text_type_main-medium"}>{name}</p>
                     {isOrderHistoryPage &&
                         <p className={"text text_type_main-default"} style={{ color: getOrderNumberColor(status) }}>{getOrderLocaleStatus(status)}</p>
                     }
                 </div>
 
-                <div key={uuidv4()} className={Styles.bottomInfoBox}>
-                    <ul  key={uuidv4()} className={Styles.imageContainer}>
-                        {ingredients.map((ingredient, index) => renderIngredientsImage(ingredient, burgerIngredients, ingredientsQty, index))}
+                <div className={Styles.bottomInfoBox}>
+                    <ul className={Styles.imageContainer}>
+
+                        {ingredients.map((ingredientId, index) => {
+
+                            const burgerIngredient = burgerIngredients.find(ingredient => ingredient._id === ingredientId);
+                            prices.push(burgerIngredient.type === "bun" ? burgerIngredient.price * 2 : burgerIngredient.price);
+                            const offset = `${50 * index}px`;
+                            const zIndex = ingredientsQty - index;
+                            let maxImgQty = index < 5;
+
+                            return (
+                                <>
+                                    {burgerIngredient && maxImgQty &&
+                                        <li key={uuidv4()} style={{ backgroundImage: `url(${burgerIngredient.image_mobile})`, left: offset, zIndex: zIndex }} className={Styles.imgList}></li>
+                                    }
+                                </>
+                            )
+                        })}
+
                         {ishiddenImg &&
                             <li key={uuidv4()} style={{ backgroundImage: `url(${lastImg})`, left: lastOffset, zIndex: lastzIndex }} className={Styles.hiddenImgList}>
                                 <p style={{ zIndex: `${lastzIndex - 1}` }} className={Styles.qtyHiddenImg}>{`+${ingredientsQty - 5}`}</p>
                             </li>
                         }
                     </ul>
-                    <div  key={uuidv4()} className={Styles.orderPriceContainer}>
+                    <div key={uuidv4()} className={Styles.orderPriceContainer}>
                         <p className={"text text_type_digits-default mr-2"}>{fullPrice}</p>
                         <CurrencyIcon type="primary" size="large" />
                     </div>
