@@ -1,6 +1,7 @@
 import { baseUrl } from "../../utils/constants";
 import { v4 as uuidv4 } from 'uuid';
 import { checkResponse } from "../../utils/functions";
+
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
 export const GET_INGREDIENTS_ERROR = "GET_INGREDIENTS_ERROR";
@@ -11,7 +12,6 @@ export const DECREASE_QTY = "DECREASE_QTY";
 export const CHANGE_POSITION = "CHANGE_POSITION";
 
 const ingredientsUrl = baseUrl + "/ingredients";
-
 
 export const addIngredientToConstructor = (ingredient) => ({
       type: ADD_INGREDIENT,

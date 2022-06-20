@@ -1,9 +1,11 @@
 import ingredientDetailsStyles from './ingredientDetails.module.css';
-import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+
 function IngredientDetails() {
 
-    const { ingredientDescription } = useSelector(state => state.ingredientDescription);
-
+    const location = useLocation();
+    const ingredientDescription  = location.state?.currentIngredient;
+  
     return (
         <>
         {ingredientDescription &&

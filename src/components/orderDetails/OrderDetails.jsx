@@ -8,7 +8,7 @@ function OrderDetails() {
 
     return ( 
             <div className={orderDetailsStyles.infoBox + " mt-9"}>
-                <h1 className={"text text_type_digits-large mb-8"}>{orderNumber}</h1>
+                <h1 className={"text text_type_digits-large mb-8"}>{orderNumber ? orderNumber : "загрузка..."}</h1>
                 <h2 className={"text text_type_main-medium mb-15"}>идентификатор заказа</h2>
                 <img className={"mb-15"} src={done} alt="изображение галки" />
                 <p className={"text text_type_main-default mb-2"}>Ваш заказ начали готовить</p>

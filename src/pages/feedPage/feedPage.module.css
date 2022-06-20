@@ -1,0 +1,73 @@
+.sectionContainer{
+    display: flex;
+    gap: 60px;
+    min-width: 1224px;
+}
+
+.leftSection{
+    overflow: visible;
+    overflow-x: hidden;
+    max-width: 596px;
+    max-height: 916px;
+}
+.rightSection{
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+}
+.totalInfoContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+.statusInfoContainer{
+    display: flex;
+    gap: 36px;
+}
+.statusInfoBox{
+    display: flex; 
+    flex-direction: column;
+    min-width: 272px;
+}
+.orderNumberContainer{
+    display: flex;
+    justify-content: space-between;
+    max-height: 152px;
+    overflow: visible;
+    overflow-x: hidden;
+}
+.h1{
+    text-align: left;
+}
+.link{
+    color:inherit;
+    text-decoration: none;
+    cursor:pointer;   
+}
+
+.link:hover{
+    opacity: 0.6;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    min-width: 920px;
+
+}
+
+.list{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    list-style-type:none;
+}
+.orderlist{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style-type:none;
+}

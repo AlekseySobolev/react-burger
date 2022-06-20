@@ -4,10 +4,12 @@ import TabList from '../tabList/TabList.jsx';
 import Ingredient from '../ingredient/Ingredient.jsx';
 import burgerIngredientsStyles from './burgerIngredients.module.css';
 import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 
 function BurgerIngredients({ onIngredientClick }) {
 
     const { ingredients } = useSelector(state => state.burgerIngredients);
+    const location = useLocation(); 
 
     const bunIngredients = ingredients.filter(e => e.type === 'bun');
     const sauceIngredients = ingredients.filter(e => e.type === 'sauce');
@@ -20,9 +22,11 @@ function BurgerIngredients({ onIngredientClick }) {
     const renderIngredient = (ingredient) => {
 
         return (
-            <React.Fragment key = {ingredient._id}>
+            <React.Fragment key={ingredient._id}>
                 {ingredient &&
-                    <Ingredient  ingredient={ingredient} onIngredientClick={onIngredientClick} />
+                      <Link className={burgerIngredientsStyles.link} to={`/ingredients/${ingredient._id}`} state={{ background: location, currentIngredient: ingredient}}>
+                        <Ingredient ingredient={ingredient} onIngredientClick={onIngredientClick} />
+                      </Link>
                 }
             </React.Fragment>
         )

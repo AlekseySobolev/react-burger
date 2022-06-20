@@ -13,7 +13,7 @@ function Modal({ title, onClose, children }) {
         (event) => {
             event.key === "Escape" && onClose();
         },
-        []);
+        [onClose]);
 
     useEffect(() => {
         document.addEventListener('keydown', handleEscKeydown);
@@ -26,15 +26,15 @@ function Modal({ title, onClose, children }) {
     return ReactDOM.createPortal(
         <>
             <div className= {Styles.modal}>
-                <div className={Styles.dataBox + ' ' + "ml-10 mb-15 mr-10 mt-10"}>
+                <div className={`${Styles.dataBox} ml-10 mb-15 mr-10 mt-10`}>
                     <div className={Styles.buttonBox}>
-                        <h1 className={"text text_type_main-large"}>{title}</h1>
+                        <h1 className={"text text_type_main-medium"}>{title}</h1>
                         <button className={Styles.button} type='button' onClick={() => onClose()}><CloseIcon type="primary" /></button>
                     </div>
                     {children}
                 </div>
             </div>
-            <ModalOverlay onClose={onClose} />
+            <ModalOverlay onClose={onClose}/>
         </>,
         modalsContainer
     );
