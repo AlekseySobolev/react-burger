@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Styles from './userOrderDetailsPage.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserOrder } from '../../services/actions/auth';
 import { getOrderLocaleStatus, getOrderNumberColor, normalizeOrderDate } from '../../utils/functions';
@@ -12,8 +12,7 @@ const prices=[];
 function UserOrderDetailsPage() {
 
     const dispatch = useDispatch();
-    const location = useLocation();
-    
+
     const { id: orderNumber } = useParams();
      const { userOrderInfo } = useSelector(state => state.feed);
    
@@ -34,43 +33,15 @@ function UserOrderDetailsPage() {
     
     const { ingredients: burgerIngredients } = useSelector(state => state.burgerIngredients);
 
-
-    // const renderOrderIngredients = (orderIngredientId) => {
-
-    //     const burgerIngredient = burgerIngredients.find(ingredient => ingredient._id === orderIngredientId);
-    //     const filteredUnicOrderIngredients = orderIngredients.filter(ingredient => ingredient === orderIngredientId);
-    //     let isBun = burgerIngredient.type === "bun";
-    //     const orderIngredientQty = isBun ? filteredUnicOrderIngredients.length * 2 : filteredUnicOrderIngredients.length;
-
-    //     prices.push((isBun ? burgerIngredient.price * 2 : burgerIngredient.price * orderIngredientQty));
-
-    //     return (
-    //         <>
-    //             {burgerIngredient &&
-    //                 <li key={uuidv4()} className={Styles.listElement + " mr-6"}>
-    //                     <div style={{ backgroundImage: `url(${burgerIngredient.image_mobile})` }} className={Styles.img + " mr-2"}></div>
-    //                     <div className={Styles.imgInfo}>
-    //                         <p>{burgerIngredient.name}</p>
-    //                         <div className={Styles.qtyPriceBox}>
-    //                             <p className={"text text_type_digits-default mr-2"}>{`${orderIngredientQty} x ${burgerIngredient.price}`}</p>
-    //                             <CurrencyIcon type="primary" size="large" />
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //             }
-    //         </>
-    //     )
-    // }
-
     const fullPrice = prices.reduce((currentSum, currentNumber) => {
         return currentSum + currentNumber
     }, 0);
 
     prices.length = 0;
     return (
-        <>
+        <React.Fragment key={uuidv4()}>
             {userOrderInfo &&
-            <>
+            <React.Fragment key={uuidv4()}>
                 <main className={Styles.main + " mt-30"}>
                 <h1 className={Styles.h1 + " text text_type_main-medium"}>{`#${orderNumber}`}</h1>
                     <div className={Styles.orderInfoBox + " mt-5"}>
@@ -92,7 +63,7 @@ function UserOrderDetailsPage() {
                                     prices.push((isBun ? burgerIngredient.price * 2 : burgerIngredient.price * orderIngredientQty));
                             
                                     return (
-                                        <>
+                                        <React.Fragment key={uuidv4()}>
                                             {burgerIngredient &&
                                                 <li key={uuidv4()} className={Styles.listElement + " mr-6"}>
                                                     <div style={{ backgroundImage: `url(${burgerIngredient.image_mobile})` }} className={Styles.img + " mr-2"}></div>
@@ -105,7 +76,7 @@ function UserOrderDetailsPage() {
                                                     </div>
                                                 </li>
                                             }
-                                        </>
+                                        </React.Fragment>
                                     )
                                 })
                             }
@@ -119,9 +90,9 @@ function UserOrderDetailsPage() {
                         </div>
                     </div>
                 </main>
-                </>
+                </React.Fragment>
             } 
-        </>
+        </React.Fragment>
     );
 }
 

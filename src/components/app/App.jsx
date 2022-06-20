@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getIngredients } from '../../services/actions/ingredients';
 import { getOrderDescription } from '../../services/actions/orderDescription';
 import { SET_INGREDIENT_DESCRIPTION } from '../../services/actions/ingredientDescription';
-import { REMOVE_INGREDIENT_DESCRIPTION } from '../../services/actions/ingredientDescription';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import MainPage from '../../pages/mainPage/MainPage';
 import RegistrationPage from '../../pages/registrationPage/RegistrationPage';
@@ -24,7 +23,6 @@ import OrderHistoryPage from '../../pages/orderHistoryPage/OrderHistoryPage';
 import FeedPage from '../../pages/feedPage/FeedPage';
 import UserOrderDetailsPage from '../../pages/userOrderDetailsPage/UserOrderDetailsPage';
 import AppHeader from '../appHeader/AppHeader';
-import UserOrderDetails from '../userOrderDetails/UserOrderDetails';
 
 function App() {
   console.log("Рeндер App");
@@ -35,7 +33,6 @@ function App() {
 
   const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(state => state.burgerIngredients);
   const { orderDescriptionFailed } = useSelector(state => state.orderDescription);
-  const { ingredientDescription } = useSelector(state => state.ingredientDescription);
 
   const { isAuth, userRequest } = useSelector(state => state.auth);
 
@@ -64,12 +61,7 @@ function App() {
 
   const closeAllModals = () => {
     setIsOrderDetailsOpened(false);
-
-    // if (ingredientDescription) {
-    //   navigate(-1);
-    //     dispatch({ type: REMOVE_INGREDIENT_DESCRIPTION }); 
-    //   }
-    navigate(-1);
+    navigate('/');
 
   }
 
@@ -110,18 +102,6 @@ function App() {
           </Routes>
         </>
       }
-
-      {/* {background &&
-      <>
-        <Routes>
-          <Route path="/feed/:id" element={
-            <Modal title={"Тест"} onClose={closeAllModals}>
-              <UserOrderDetails />
-            </Modal>
-          } />
-        </Routes>
-        </>
-      } */}
 
       {isOrderDetailsOpened &&
         <Modal title={""} onClose={closeAllModals}>

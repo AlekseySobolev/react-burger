@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Styles from './feedPage.module.css';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import OrderElement from '../../components/orderElement/OrderElement';
 import { wsStartConnection, wsCloseConnection } from '../../services/actions/wsActions';
@@ -31,10 +31,7 @@ function FeedPage() {
 
 
     const closeAllModals = () => {
-
-
-        navigate(-1);
-
+        navigate('/feed');
     }
 
     const onUserOrderDetailsClick = (userOrderDescription) => {
@@ -89,13 +86,13 @@ function FeedPage() {
                         <ul className={Styles.orderlist}>
                             {filteredOrders.map((filteredOrder, index) => {
                                 return (
-                                    <>
+                                    <React.Fragment key={uuidv4()}>
                                         {index <= 10 &&
                                             <li key={uuidv4()} className={Styles.orderListElement + " text text_type_digits-default"} style={{ color: `${orderNumberColor}` }}>
                                                 {filteredOrder.number}
                                             </li>
                                         }
-                                    </>
+                                    </React.Fragment>
                                 )
 
                             })}
@@ -105,13 +102,13 @@ function FeedPage() {
                             {filteredOrders.map((filteredOrder, index) => {
 
                                 return (
-                                    <>
+                                    <React.Fragment key={uuidv4()}>
                                         {index >= 10 &&
                                             <li key={uuidv4()} className={Styles.orderListElement + " text text_type_digits-default"} style={{ color: `${orderNumberColor}` }}>
                                                 {filteredOrder.number}
                                             </li>
                                         }
-                                    </>
+                                    </React.Fragment>
                                 )
                             })}
                         </ul>

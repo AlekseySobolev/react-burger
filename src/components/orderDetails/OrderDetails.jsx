@@ -1,11 +1,9 @@
 import orderDetailsStyles from './orderDetails.module.css';
 import done from '../../images/done.png';
-import { useLocation } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 function OrderDetails() {
 
-    const location = useLocation();
-    const orderDescription  = location.state?.currentOrder;
+    const { orderDescription } = useSelector(state => state.orderDescription);
     const orderNumber = orderDescription?.order?.number;
 
     return ( 

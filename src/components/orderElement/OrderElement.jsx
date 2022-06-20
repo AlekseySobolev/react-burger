@@ -6,6 +6,7 @@ import Styles from './orderElement.module.css';
 import { getOrderLocaleStatus, getOrderNumberColor, normalizeOrderDate } from '../../utils/functions';
 import { v4 as uuidv4 } from 'uuid';
 import { orderType } from '../../utils/constants';
+import React from 'react';
 
 const prices = [];
 
@@ -52,13 +53,13 @@ function OrderElement({ element, isOrderHistoryPage, onUserOrderClick }) {
                             const offset = `${50 * index}px`;
                             const zIndex = ingredientsQty - index;
                             let maxImgQty = index < 5;
-
+                            // <React.Fragment key={uuidv4()}></React.Fragment>
                             return (
-                                <>
+                                <React.Fragment key={uuidv4()}>
                                     {burgerIngredient && maxImgQty &&
                                         <li key={uuidv4()} style={{ backgroundImage: `url(${burgerIngredient.image_mobile})`, left: offset, zIndex: zIndex }} className={Styles.imgList}></li>
                                     }
-                                </>
+                                </React.Fragment>
                             )
                         })}
 
@@ -68,7 +69,7 @@ function OrderElement({ element, isOrderHistoryPage, onUserOrderClick }) {
                             </li>
                         }
                     </ul>
-                    <div key={uuidv4()} className={Styles.orderPriceContainer}>
+                    <div className={Styles.orderPriceContainer}>
                         <p className={"text text_type_digits-default mr-2"}>{fullPrice}</p>
                         <CurrencyIcon type="primary" size="large" />
                     </div>

@@ -23,19 +23,4 @@ import {
     };
   };
   
- 
-  
-//   export const wsGetMessage = message => {
-//     return {
-//       type: WS_GET_MESSAGE,
-//       payload: message
-//     };
-//   };
-  
-//   export const wsSendMessage = message => {
-//     return {
-//       type: WS_SEND_MESSAGE,
-//       payload: message
-//     };
-//   };
   

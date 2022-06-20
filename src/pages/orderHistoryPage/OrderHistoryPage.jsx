@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Styles from './orderHistoryPage.module.css';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -41,7 +41,7 @@ function OrderHistoryPage() {
 
 
     const closeAllModals = () => {
-        navigate(-1);
+        navigate('/profile/orders');
     }
 
     const onUserOrderDetailsClick = (userOrderDescription) => {
@@ -51,15 +51,6 @@ function OrderHistoryPage() {
         }
 
     };
-
-    // const renderOrderElement = (element) => {
-    //     return (
-    //         <Link className={Styles.link} to={`/profile/orders/${element.number}`} state={{ background: location, currentOrder: element }}>
-    //             <OrderElement element={element} isOrderHistoryPage={true} onUserOrderClick={onUserOrderDetailsClick} />
-    //         </Link>
-    //     )
-    // };
-
 
     return (
         <>

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { getOrderLocaleStatus, getOrderNumberColor, normalizeOrderDate } from '../../utils/functions';
 import { v4 as uuidv4 } from 'uuid';
 import { useLocation } from 'react-router-dom';
+import React from 'react';
 const prices = [];
 
 function UserOrderDetails() {
@@ -17,7 +18,7 @@ function UserOrderDetails() {
     const { ingredients: burgerIngredients } = useSelector(state => state.burgerIngredients);
 
 
-    const renderOrderIngredients = (orderIngredientId, index) => {
+    const renderOrderIngredients = (orderIngredientId) => {
 
         const burgerIngredient = burgerIngredients.find(ingredient => ingredient._id === orderIngredientId);
         const filteredUnicOrderIngredients = orderIngredients.filter(ingredient => ingredient === orderIngredientId);
@@ -27,7 +28,7 @@ function UserOrderDetails() {
         prices.push((isBun ? burgerIngredient.price * 2 : burgerIngredient.price * orderIngredientQty));
 
         return (
-            <>
+            <React.Fragment key={uuidv4()}>
                 {burgerIngredient &&
 
                     <li key={uuidv4()} className={Styles.listElement + " mr-6"}>
@@ -41,7 +42,7 @@ function UserOrderDetails() {
                         </div>
                     </li>
                 }
-            </>
+            </React.Fragment>
         )
     }
 
@@ -50,7 +51,7 @@ function UserOrderDetails() {
     }, 0);
     prices.length = 0;
     return (
-        <>
+        <React.Fragment key={uuidv4()}>
             {userOrderDescription &&
                 <main className={Styles.main + " mt-10"}>
                     <div className={Styles.orderInfoBox}>
@@ -75,7 +76,7 @@ function UserOrderDetails() {
                     </div>
                 </main>
             }
-        </>
+        </React.Fragment>
     );
 }
 
