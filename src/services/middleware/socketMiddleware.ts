@@ -2,7 +2,7 @@ import { MiddlewareAPI } from 'redux';
 import { IWsActions } from '../../services/store'
 import { AppDispatch, RootState } from '../types';
 
-export const socketMiddleware = (wsActions: IWsActions) => (store) => {
+export const socketMiddleware = (wsActions: IWsActions) => (store: MiddlewareAPI<any, RootState>) => {// если в первый параметр MiddlewareAPI передаю AppDispatch появляется ошибка
 
       let socket: WebSocket | null = null;
   
