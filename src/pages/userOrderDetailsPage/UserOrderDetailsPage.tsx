@@ -67,7 +67,6 @@ function UserOrderDetailsPage() {
                                     else if(!isBun && burgerIngredient) {
                                         commonPrice = burgerIngredient?.price * orderIngredientQty;
                                     }                            
-                                    // prices.push((isBun ? burgerIngredient?.price * 2 : burgerIngredient?.price * orderIngredientQty));
                                     prices.push(commonPrice);
 
                                     return (
@@ -79,7 +78,6 @@ function UserOrderDetailsPage() {
                                                         <p>{burgerIngredient.name}</p>
                                                         <div className={Styles.qtyPriceBox}>
                                                             <p className={"text text_type_digits-default mr-2"}>{`${orderIngredientQty} x ${burgerIngredient.price}`}</p>
-                                                            {/* <CurrencyIcon type="primary" size="large" /> */}
                                                             <CurrencyIcon type="primary" />
                                                         </div>
                                                     </div>
@@ -95,7 +93,6 @@ function UserOrderDetailsPage() {
                         <p className={"text text_type_main-default text_color_inactive"}>{normalizeOrderDate(userOrderInfo[0].createdAt)}</p>
                         <div className={Styles.qtyPriceBox}>
                             <p className={"text text_type_main-medium mr-2"}>{fullPrice}</p>
-                            {/* <CurrencyIcon type="primary" size= "large" /> */}
                             <CurrencyIcon type="primary" />
                         </div>
                     </div>

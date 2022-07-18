@@ -14,7 +14,7 @@ export interface IModal {
 export const Modal: FC<IModal> = ({ title, onClose, children }) => {
 
     const handleEscKeydown = useCallback(
-        (event) => {
+        (event: KeyboardEvent) => {
             event.key === "Escape" && onClose();
         },
         [onClose]);

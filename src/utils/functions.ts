@@ -33,7 +33,7 @@ export const normalizeOrderDate = (date: string) => {
 }
 
 
-export const checkResponse = (response) => {
+export const checkResponse = (response: Response) => {
     if (response.ok) {
       return response.json()
     }

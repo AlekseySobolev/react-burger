@@ -65,7 +65,7 @@ function FeedPage() {
                 }
                 {filteredOrders && ordersQty <= 10 &&
                     <ul className={Styles.orderlist}>
-                        {filteredOrders.map((filteredOrder: TUserOrderDescription) => {
+                        {filteredOrders.map((filteredOrder) => {
                             return (
                                 <li key={uuidv4()} className={Styles.orderListElement + " text text_type_digits-default"} style={{ color: `${orderNumberColor}` }}>
                                     {filteredOrder.number}
@@ -78,7 +78,7 @@ function FeedPage() {
                 {filteredOrders && ordersQty >= 10 &&
                     <>
                         <ul className={Styles.orderlist}>
-                            {filteredOrders.map((filteredOrder: TUserOrderDescription, index: number) => {
+                            {filteredOrders.map((filteredOrder, index) => {
                                 return (
                                     <React.Fragment key={uuidv4()}>
                                         {index <= 10 &&
@@ -93,7 +93,7 @@ function FeedPage() {
                         </ul>
 
                         <ul className={Styles.orderlist}>
-                            {filteredOrders.map((filteredOrder: TUserOrderDescription, index: number) => {
+                            {filteredOrders.map((filteredOrder, index) => {
 
                                 return (
                                     <React.Fragment key={uuidv4()}>

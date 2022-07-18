@@ -1,12 +1,13 @@
+import { MiddlewareAPI } from 'redux';
 import { IWsActions } from '../../services/store'
+import { AppDispatch, RootState } from '../types';
 
-export const socketMiddleware = (wsActions: IWsActions) => {
+export const socketMiddleware = (wsActions: IWsActions) => (store: MiddlewareAPI<AppDispatch, RootState>) => {
 
-    return store => {
-
-      let socket: any = null;
+      let socket: WebSocket | null = null;
   
       return next => action => {
+
         const { dispatch } = store;
         const { type, payload } = action;
         const {wsInit, onOpen, onClose, onError, onMessage } = wsActions;
@@ -50,5 +51,5 @@ export const socketMiddleware = (wsActions: IWsActions) => {
   
         next(action);
       };
-    };
+
   };

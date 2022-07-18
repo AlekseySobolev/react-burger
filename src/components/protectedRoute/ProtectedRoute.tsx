@@ -1,8 +1,10 @@
-import { Navigate, useLocation } from 'react-router-dom';
+import { FC, PropsWithChildren } from 'react';
+import { Navigate, RouteProps, useLocation } from 'react-router-dom';
 import { useSelector } from '../../services/hooks';
-import type { TLocationParams, TUserOrderDescription } from '../../services/types/data';
+import type { TLocationParams } from '../../services/types/data';
 
-function ProtectedRoute({ children }) {
+// export const ProtectedRoute: FC<RouteProps> = ( {children} ) => { не удалось типизировать, ругается на тип ReactNode
+ function ProtectedRoute ({ children }) {
 
   const location = useLocation() as TLocationParams;
 

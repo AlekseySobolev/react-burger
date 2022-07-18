@@ -1,13 +1,13 @@
 import ingredientDetailsStyles from './ingredientDetailsPage.module.css';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+
 import { useMemo } from 'react';
-import type { RootState } from '../../services/store';
+import { useSelector } from '../../services/hooks';
 
 function IngredientDetailsPage() {
 
     const {id : ingredientId } = useParams<{id: string}>();
-    const { ingredients }: any = useSelector((state: RootState)=>state.burgerIngredients);
+    const { ingredients } = useSelector(state=>state.burgerIngredients);
 
     const ingredientDescription = useMemo(
     () => ingredients.find(ingredient => ingredient._id === ingredientId)
