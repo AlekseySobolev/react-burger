@@ -2,7 +2,7 @@ import { MiddlewareAPI, Middleware } from 'redux';
 import { IWsActions } from '../../services/store'
 import { RootState } from '../types';
 
-export const socketMiddleware = (wsActions: IWsActions) => (store: MiddlewareAPI<any, RootState>) => {
+export const socketMiddleware = (wsActions: IWsActions): Middleware => (store: MiddlewareAPI<any, RootState>) => {
 
       let socket: WebSocket | null = null;
   

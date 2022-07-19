@@ -16,13 +16,10 @@ type TApplicationActions =
   | TOrderDescriptionActions
   | TUserOrderDescriptionActions
   | TWsActions;
-
   
   export type RootState = ReturnType<typeof rootReducer>;
   export type AppDispatch = Dispatch<TApplicationActions>;
 
-
 export type AppThunk<ReturnType = void> = ActionCreator<
   ThunkAction<ReturnType, RootState, unknown, TApplicationActions>
 >;
-
