@@ -31,6 +31,3 @@ const enhancer = composeEnhancers(applyMiddleware(thunk), applyMiddleware(socket
 
 export const store = createStore(rootReducer, enhancer);
 
-export type AppDispatch = typeof store.dispatch;
-
-export type RootState = ReturnType<typeof store.getState>;

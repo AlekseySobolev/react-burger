@@ -23,7 +23,7 @@ import FeedPage from '../../pages/feedPage/FeedPage';
 import UserOrderDetailsPage from '../../pages/userOrderDetailsPage/UserOrderDetailsPage';
 import AppHeader from '../appHeader/AppHeader';
 import { useSelector, useDispatch } from '../../services/hooks';
-import type { TIngredientDescription, TLocationParams, TUserOrderDescription } from '../../services/types/data';
+import type { TIngredientDescription, TLocationParams } from '../../services/types/data';
 
 function App() {
 

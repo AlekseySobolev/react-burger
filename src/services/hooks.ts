@@ -4,8 +4,8 @@ import {
     useDispatch as dispatchHook,
     useSelector as selectorHook
   } from 'react-redux';
-  import type { AppThunk } from './types';
-  import type { AppDispatch,  RootState } from './store';
+  import type { AppDispatch, AppThunk, RootState } from './types';
+  
   // Теперь этот хук знает структуру хранилища
   export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
   

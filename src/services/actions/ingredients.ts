@@ -28,7 +28,7 @@ export interface IGetIngredientsErrorAction {
 
 export interface IAddIngredientAction {
   readonly type: typeof ADD_INGREDIENT;
-  readonly ingredientWithUuid: TIngredientDescriptionWithUuid[]
+  readonly ingredientWithUuid: TIngredientDescriptionWithUuid
 }
 
 export interface IDelIngredientAction {
@@ -68,7 +68,7 @@ export type TIngredientsActions =
 
 interface IAddIngredientToConstructor {
   readonly type: typeof ADD_INGREDIENT;
-  // ingredientWithUuid: any;
+
   ingredientWithUuid: {
     ingredient?: TIngredientDescription,
     uuid: string

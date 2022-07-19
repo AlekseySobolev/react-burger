@@ -3,7 +3,7 @@ import { TIngredientDescription, TIngredientDescriptionWithUuid } from '../types
 
 export type TIngredientsState = {
   ingredients: TIngredientDescription[],
-  constructorIngredients: any[], // при TIngredientDescriptionWithUuid[] возникает ошибка на 68 стр кода, которую не смог побороть.
+  constructorIngredients: TIngredientDescriptionWithUuid[], 
   ingredientsRequest: boolean,
   ingredientsFailed: boolean,
 }

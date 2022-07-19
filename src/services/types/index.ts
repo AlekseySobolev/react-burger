@@ -1,6 +1,5 @@
 import { ThunkAction } from 'redux-thunk';
 import { ActionCreator } from 'redux';
-import { store } from '../store';
 import { TIngredientDescriptionActions } from '../actions/ingredientDescription';
 import { TOrderDescriptionActions } from '../actions/orderDescription';
 import { TUserOrderDescriptionActions } from '../actions/userOrderDescription';
@@ -19,7 +18,7 @@ type TApplicationActions =
   | TWsActions;
 
   
-  export type RootState = ReturnType< typeof rootReducer>;
+  export type RootState = ReturnType<typeof rootReducer>;
   export type AppDispatch = Dispatch<TApplicationActions>;
 
 
